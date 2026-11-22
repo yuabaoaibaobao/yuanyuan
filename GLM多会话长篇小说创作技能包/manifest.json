@@ -6,7 +6,7 @@
   "character_count_method": "Unicode non-whitespace code points; punctuation counts; see 工具/字数统计.py",
   "inventory_excludes": "manifest.json itself (self-referential hash excluded)",
   "file_count_excluding_manifest": 149,
-  "total_unicode_non_whitespace_characters_excluding_manifest": 102250,
+  "total_unicode_non_whitespace_characters_excluding_manifest": 102951,
   "root_files": {
     "01_自定义指令.md": 1061,
     "02_长期记忆.md": 476
@@ -981,9 +981,9 @@
       "path": "CHANGELOG.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1398,
-      "unicode_non_whitespace_characters": 517,
-      "sha256": "9b8685ed89edd4733339d1265afd6235437331827424cd2fc7f332f58f06d2ad"
+      "bytes": 1462,
+      "unicode_non_whitespace_characters": 541,
+      "sha256": "bcaaf3657689c0dc67cc81bde5d4489ede554483fa8bca4c54784ecbefa859ee"
     },
     {
       "path": "LICENSE",
@@ -997,9 +997,9 @@
       "path": "P6验收报告.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3025,
-      "unicode_non_whitespace_characters": 1182,
-      "sha256": "a3eacf0003e22a283d334423b4fb37c46eea4da0de569a66b482ef955c5c7495"
+      "bytes": 3091,
+      "unicode_non_whitespace_characters": 1210,
+      "sha256": "62f5d86abb7da7c493ab0ddfbbb6cda47b9be187ec82ebb6b2ebb4c5cc36e215"
     },
     {
       "path": "README.md",
@@ -1029,17 +1029,17 @@
       "path": "工具/构建与校验.py",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 6535,
-      "unicode_non_whitespace_characters": 5119,
-      "sha256": "dce6d8ea82825aec643c64d7672ad72b177a8bfbe8d75529a89e960f71c1d263"
+      "bytes": 7088,
+      "unicode_non_whitespace_characters": 5553,
+      "sha256": "58f21e93a7adb76f19b93136afd057c8b9ea6c5e51bebe2e96feb94c5f4eed76"
     },
     {
       "path": "工具/测试工具.py",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1301,
-      "unicode_non_whitespace_characters": 1073,
-      "sha256": "e32ed0108a7f7462320ae3b42ca7692c3176abcab4d19f7c243b164a9b6b024b"
+      "bytes": 1565,
+      "unicode_non_whitespace_characters": 1288,
+      "sha256": "06feacbea3c0746d1f1b9aa324218b9c4fe190fa285f3b042ed01bdf65113736"
     },
     {
       "path": "方法论吸收映射表.md",
