@@ -191,9 +191,10 @@
         "platform_name",
         "version",
         "status",
+        "artifact_kind",
         "sole_writer",
         "sha256",
-        "downstream_read_receipt"
+        "read_receipts"
       ],
       "properties": {
         "logical_path": {
@@ -229,14 +230,31 @@
           "type": "string",
           "pattern": "^(未知|[a-fA-F0-9]{64})$"
         },
-        "downstream_read_receipt": {
-          "type": "string",
-          "minLength": 1
-        },
         "depends_on": {
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "artifact_kind": {
+          "enum": [
+            "project_state",
+            "canon",
+            "chapter_card",
+            "draft",
+            "polished",
+            "audit",
+            "window_report",
+            "final",
+            "quality_ledger",
+            "rolling_summary",
+            "other"
+          ]
+        },
+        "read_receipts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/receipt"
           }
         }
       }

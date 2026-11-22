@@ -14,7 +14,7 @@ def shingles(text: str, n: int) -> set[str]:
     return {compact[i:i+n] for i in range(len(compact) - n + 1)}
 
 
-def inspect(text: str, n: int = 8, threshold: float = 0.8) -> tuple[list[tuple[int, int, float]], list[tuple[int, int]]]:
+def inspect(text: str, n: int = 8, threshold: float = 0.8) -> tuple[int, list[tuple[int, int, float]], list[tuple[int, int]]]:
     paragraphs = [p.strip() for p in re.split(r'\n\s*\n', text) if p.strip()]
     exact: dict[str, list[int]] = defaultdict(list)
     for i, paragraph in enumerate(paragraphs, 1): exact[''.join(paragraph.split())].append(i)
@@ -27,7 +27,7 @@ def inspect(text: str, n: int = 8, threshold: float = 0.8) -> tuple[list[tuple[i
             score = len(sets[i] & sets[j]) / len(union) if union else 1.0
             if score >= threshold:
                 near.append((i+1, j+1, score))
-    return near, exact_pairs
+    return len(paragraphs), near, exact_pairs
 
 
 def main() -> int:
@@ -40,11 +40,12 @@ def main() -> int:
         print('FAIL: ngram must be >=2 and threshold must be in (0,1]', file=sys.stderr); return 2
     try: text = args.chapter.read_text(encoding='utf-8')
     except OSError as exc: print(f'FAIL: {exc}', file=sys.stderr); return 2
-    near, exact = inspect(text, args.ngram, args.threshold)
-    print(f'paragraphs_checked; exact_duplicate_pairs={len(exact)}; near_duplicate_pairs={len(near)}; ngram={args.ngram}; threshold={args.threshold}')
+    paragraphs_checked, near, exact = inspect(text, args.ngram, args.threshold)
+    print(f'paragraphs_checked={paragraphs_checked}; exact_duplicate_pairs={len(exact)}; near_duplicate_pairs={len(near)}; ngram={args.ngram}; threshold={args.threshold}')
     for a, b in exact: print(f'EXACT paragraph {a} == {b}')
     for a, b, score in near: print(f'NEAR paragraph {a} / {b} Jaccard={score:.3f}')
     print('This diagnostic is not a semantic padding detector and does not establish plagiarism or AI authorship.')
-    return 1 if exact or near else 0
+    # Similarity findings are advisory; only I/O or argument errors return non-zero.
+    return 0
 
 if __name__ == '__main__': raise SystemExit(main())

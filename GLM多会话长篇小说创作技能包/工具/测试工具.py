@@ -3,9 +3,13 @@
 from __future__ import annotations
 from pathlib import Path
 import hashlib
+import io
 import json
+import os
 import runpy
 import tempfile
+import zipfile
+from contextlib import redirect_stderr
 from types import SimpleNamespace
 import unittest
 
@@ -47,9 +51,34 @@ class StateAndSummaryTests(unittest.TestCase):
         errors = state.validate(data)
         self.assertTrue(any('stage' in e for e in errors))
         self.assertTrue(any('stale_candidates' in e for e in errors))
-    def test_repeated_paragraphs_are_flagged(self):
-        near, exact = repetition.inspect('重复段落甲乙丙。\n\n另一段内容。\n\n重复段落甲乙丙。')
+    def test_release_gate_requires_root_and_checks_registered_hashes(self):
+        import hashlib
+        data = json.loads((ROOT / '项目运行模板/project_state.json').read_text(encoding='utf-8'))
+        data['gates'].update({'dependencies_read': '通过', 'chapter_complete': '通过', 'audit_07': '通过', 'window_08': '不适用', 'release_09': '通过'})
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            payload = base / 'chapter.md'
+            payload.write_text('定稿正文', encoding='utf-8')
+            data['files'] = [{'logical_path': 'chapter.md', 'platform_name': 'chapter.md', 'version': 'v1',
+                'status': '定稿', 'artifact_kind': 'other', 'sole_writer': '用户',
+                'sha256': hashlib.sha256(payload.read_bytes()).hexdigest(), 'read_receipts': []}]
+            self.assertTrue(any('--root' in error for error in state.validate(data)))
+            self.assertEqual(state.validate(data, base), [])
+            data['files'][0]['sha256'] = '0' * 64
+            self.assertTrue(any('does not match file bytes' in error for error in state.validate(data, base)))
+    def test_repeated_paragraphs_are_advisory_with_sample_count(self):
+        count, near, exact = repetition.inspect('重复段落甲乙丙。\n\n另一段内容。\n\n重复段落甲乙丙。')
+        self.assertEqual(count, 3)
         self.assertTrue(exact)
+    def test_markdown_heading_and_frontmatter_do_not_count_as_prose(self):
+        text = '---\ntitle: chapter\n---\n# 第001章\n正文。\n<!-- note -->'
+        self.assertEqual(counter.count_chars(counter.prose_text(text)), 3)
+    def test_inline_count_command_input(self):
+        self.assertEqual(counter.count_chars('甲，乙'), 3)
+    def test_workspace_files_are_not_package_sources(self):
+        self.assertTrue(bundle.is_workspace_path(Path('项目状态索引.json')))
+        self.assertTrue(bundle.is_workspace_path(Path('项目工作区/chapter-001.md')))
+        self.assertFalse(bundle.is_workspace_path(Path('作者05/会话指令.md')))
     def test_summary_coverage_pass_and_gap_fail(self):
         text = '''# 摘要\n- 项目/摘要版本/生效时间：x\n- 覆盖章号闭区间：1-2\n- 相关定稿版本/哈希清单：x\n- 最近校验者/校验报告版本：x\n| 章号/定稿版本 | 关键事件与因果 | 人物状态 | 伏笔 | 道具/地点/时间/规则 | 回查路径 | 状态 |\n|---|---|---|---|---|---|---|\n| 1 / v1 | x | x | x | x | x | 已确认 |\n| 2 / v1 | x | x | x | x | x | 已确认 |\n## 窗口共识\nx\n## 更新与完整性\nx\n'''
         self.assertEqual(summary.validate(text, {1, 2}), [])
@@ -58,22 +87,48 @@ class StateAndSummaryTests(unittest.TestCase):
 class BundleTests(unittest.TestCase):
     def test_source_manifest_and_zip_integrity(self):
         self.assertTrue(bundle.verify())
+    def test_embedded_zip_manifest_must_match_selected_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            source_zip, manifest_path, corrupted = tmp / 'source.zip', tmp / 'manifest.json', tmp / 'corrupted.zip'
+            bundle.build(source_zip, manifest_path)
+            with zipfile.ZipFile(source_zip) as source, zipfile.ZipFile(corrupted, 'w') as target:
+                for info in source.infolist():
+                    payload = b'{}' if info.filename == 'manifest.json' else source.read(info.filename)
+                    target.writestr(info, payload)
+            with redirect_stderr(io.StringIO()):
+                self.assertFalse(bundle.verify(corrupted, manifest_path))
     def test_semantic_lint(self):
         self.assertTrue(bundle.lint())
     def test_reproducible_build_is_hermetic(self):
         source_manifest = (ROOT / 'manifest.json').read_bytes()
-        source_zip = bundle.ZIP_PATH.read_bytes()
+        source_zip = bundle.ZIP_PATH.read_bytes() if bundle.ZIP_PATH.exists() else None
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
             zip_path, manifest_path = tmp / 'kit.zip', tmp / 'manifest.json'
             bundle.build(zip_path, manifest_path)
             first = hashlib.sha256(zip_path.read_bytes()).hexdigest()
-            bundle.build(zip_path, manifest_path)
+            bundle.build(zip_path, manifest_path, overwrite=True)
             second = hashlib.sha256(zip_path.read_bytes()).hexdigest()
             self.assertEqual(first, second)
             self.assertTrue(bundle.verify(zip_path, manifest_path))
         self.assertEqual(source_manifest, (ROOT / 'manifest.json').read_bytes())
-        self.assertEqual(source_zip, bundle.ZIP_PATH.read_bytes())
+        if source_zip is not None: self.assertEqual(source_zip, bundle.ZIP_PATH.read_bytes())
+    def test_source_verify_in_custom_directory_without_zip(self):
+        if os.environ.get('KIT_NO_CLONE_TEST'): self.skipTest('nested clone test disabled')
+        import shutil, subprocess, sys
+        with tempfile.TemporaryDirectory() as tmp:
+            clone = Path(tmp) / 'newpack'
+            shutil.copytree(ROOT, clone, ignore=shutil.ignore_patterns('__pycache__', '项目工作区'))
+            result = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'verify'], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn('ZIP check skipped', result.stdout)
+            child_env = dict(os.environ, KIT_NO_CLONE_TEST='1')
+            result_tests = subprocess.run([sys.executable, str(clone / '工具/测试工具.py')], capture_output=True, text=True, env=child_env)
+            self.assertEqual(result_tests.returncode, 0, result_tests.stderr)
+            self.assertIn('Ran ', result_tests.stderr)
+            self.assertNotIn('ERROR', result_tests.stderr)
+            self.assertNotIn('FAILED', result_tests.stderr)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
