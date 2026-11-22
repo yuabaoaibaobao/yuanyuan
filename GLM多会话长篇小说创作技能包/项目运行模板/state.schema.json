@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project_state.schema.json",
+  "title": "Long-form novel project state checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "state_version",
+    "updated_at",
+    "owner",
+    "stage",
+    "next_action",
+    "next_owner",
+    "model",
+    "rule_versions",
+    "gates",
+    "files",
+    "open_issue_ids",
+    "stale_candidates"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ISO 8601 timestamp including timezone",
+      "format": "date-time"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique project-state writer; normally the user/project owner"
+    },
+    "stage": {
+      "enum": [
+        "立项",
+        "检索",
+        "设定",
+        "章节卡",
+        "正文",
+        "润色",
+        "审计",
+        "返修",
+        "定稿",
+        "周期审计",
+        "暂停"
+      ]
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Exactly one executable next action; use an explicit blocked/pause action if blocked"
+    },
+    "next_owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_mode": {
+      "enum": [
+        "10会话",
+        "人工合并会话",
+        "待选择"
+      ]
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display_name",
+        "entry",
+        "context_window",
+        "observed_at"
+      ],
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entry": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context_window": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Observed value or explicitly '未知'"
+        },
+        "observed_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "rule_versions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "required": [
+        "01",
+        "02",
+        "05",
+        "audit"
+      ]
+    },
+    "injection_receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/injection"
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "待检查",
+          "通过",
+          "阻断",
+          "不适用"
+        ]
+      },
+      "required": [
+        "user_confirmation",
+        "dependencies_read",
+        "chapter_complete",
+        "audit_07",
+        "window_08",
+        "release_09"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      }
+    },
+    "open_issue_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "stale_candidates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Candidate file/ID invalidated by a canon change; must be revalidated before release"
+    },
+    "chapter_batch": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/chapter"
+      }
+    },
+    "handoff_receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/receipt"
+      }
+    },
+    "backup_location": {
+      "type": "string"
+    },
+    "pause_reason": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logical_path",
+        "platform_name",
+        "version",
+        "status",
+        "sole_writer",
+        "sha256",
+        "downstream_read_receipt"
+      ],
+      "properties": {
+        "logical_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "草稿",
+            "待确认",
+            "已锁",
+            "审计通过",
+            "返修中",
+            "定稿",
+            "归档",
+            "stale",
+            "阻断"
+          ]
+        },
+        "sole_writer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^(未知|[a-fA-F0-9]{64})$"
+        },
+        "downstream_read_receipt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "chapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "candidate_status",
+        "depends_on_canon_versions"
+      ],
+      "properties": {
+        "chapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "candidate_status": {
+          "enum": [
+            "候选",
+            "生成中",
+            "stale",
+            "审计通过",
+            "定稿",
+            "阻断"
+          ]
+        },
+        "depends_on_canon_versions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "stale_reason": {
+          "type": "string"
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "file_or_rule",
+        "version_or_sha",
+        "read_status",
+        "at"
+      ],
+      "properties": {
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file_or_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version_or_sha": {
+          "type": "string",
+          "minLength": 1
+        },
+        "read_status": {
+          "enum": [
+            "已读",
+            "未读",
+            "待确认"
+          ]
+        },
+        "at": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "injection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component",
+        "sha256",
+        "unicode_non_whitespace_code_points",
+        "at",
+        "observed_result",
+        "confirmed_by"
+      ],
+      "properties": {
+        "component": {
+          "enum": [
+            "01",
+            "02",
+            "作者会话指令",
+            "其他"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "unicode_non_whitespace_code_points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_result": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the account actually retained/recalled; do not infer full adherence"
+        },
+        "confirmed_by": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@ def record(path: Path) -> dict:
     return {'path': rel, 'version': VERSION, 'encoding': 'UTF-8', 'bytes': len(raw),
             'unicode_non_whitespace_characters': count_chars(text), 'sha256': hashlib.sha256(raw).hexdigest()}
 
-def build() -> None:
+def build(zip_path: Path = ZIP_PATH, manifest_path: Path = ROOT / 'manifest.json') -> None:
     paths = files_in_order()
     entries = [record(p) for p in paths]
     manifest = {'package': ROOT.name, 'version': VERSION, 'generated_date_utc': BUILD_DATE,
@@ -50,7 +50,7 @@ def build() -> None:
         'total_unicode_non_whitespace_characters_excluding_manifest': sum(e['unicode_non_whitespace_characters'] for e in entries),
         'root_files': {p: next(e['unicode_non_whitespace_characters'] for e in entries if e['path'] == p) for p in FIRST},
         'external_guides_not_in_zip': EXTERNAL, 'files': entries}
-    (ROOT / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     def add_file(zf: zipfile.ZipFile, path: Path, arcname: str) -> None:
         # Freeze ZIP timestamps and permissions so rebuilding the same release
         # from unchanged sources yields identical archive bytes.
@@ -59,14 +59,14 @@ def build() -> None:
         info.external_attr = 0o100644 << 16
         zf.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
 
-    with zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
         for p in paths:
             add_file(zf, p, p.relative_to(ROOT).as_posix())
-        add_file(zf, ROOT / 'manifest.json', 'manifest.json')
-    print(f'Built {ZIP_PATH.name}: {len(entries)} files + manifest; {manifest["total_unicode_non_whitespace_characters_excluding_manifest"]:,} non-whitespace code points')
+        add_file(zf, manifest_path, 'manifest.json')
+    print(f'Built {zip_path.name}: {len(entries)} files + manifest; {manifest["total_unicode_non_whitespace_characters_excluding_manifest"]:,} non-whitespace code points')
 
-def verify() -> bool:
-    manifest = json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8'))
+def verify(zip_path: Path = ZIP_PATH, manifest_path: Path = ROOT / 'manifest.json') -> bool:
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
     expected = {e['path']: e for e in manifest['files']}
     errors = []
     if manifest.get('version') != '1.1.0': errors.append('manifest version is not 1.1.0')
@@ -90,9 +90,9 @@ def verify() -> bool:
         if raw.startswith(b'\xef\xbb\xbf'): errors.append(f'{rel}: UTF-8 BOM')
         if len(raw) != item['bytes'] or hashlib.sha256(raw).hexdigest() != item['sha256'] or count_chars(text) != item['unicode_non_whitespace_characters']:
             errors.append(f'{rel}: manifest metadata mismatch')
-    if not ZIP_PATH.exists(): errors.append(f'ZIP missing: {ZIP_PATH}')
+    if not zip_path.exists(): errors.append(f'ZIP missing: {zip_path}')
     else:
-        with zipfile.ZipFile(ZIP_PATH) as zf:
+        with zipfile.ZipFile(zip_path) as zf:
             bad = zf.testzip()
             if bad: errors.append(f'CRC failure: {bad}')
             names = zf.namelist()
@@ -113,10 +113,42 @@ def verify() -> bool:
     print(f'PASS: {len(expected)} source files; ZIP CRC/inventory/order/hashes and manifest metadata verified.')
     return True
 
+def lint() -> bool:
+    # Semantic checks are deliberately distinct from byte-level integrity verification.
+    errors = []
+    for i in range(1, 11):
+        p = ROOT / f'作者{i:02d}' / 'README.md'
+        text = p.read_text(encoding='utf-8')
+        if '文件区共享；' in text or '文件区共享,' in text:
+            errors.append(f'{p.relative_to(ROOT)}: unqualified cross-session sharing claim')
+        if '冒烟测试确认' not in text or '读不到即阻断' not in text:
+            errors.append(f'{p.relative_to(ROOT)}: missing conditional file-access fallback')
+    checks = {
+        ROOT / '作者03/README.md': ('并广播',),
+        ROOT / '作者03/会话指令.md': ('并广播',),
+        ROOT / '作者09/会话指令.md': ('作者03账本变更；质量账本事件',),
+        ROOT / '作者05/README.md': ('每章2500-4000字', '每章2500–4000字'),
+        ROOT / '作者05/输入输出契约.md': ('每章2500-4000字', '每章2500–4000字'),
+        ROOT / '作者07/会话指令.md': ('两轨都通过且无待确认才进入09。', '独立审AI味'),
+    }
+    for path, forbidden in checks.items():
+        text = path.read_text(encoding='utf-8')
+        for phrase in forbidden:
+            if phrase in text: errors.append(f'{path.relative_to(ROOT)}: forbidden unqualified phrase {phrase!r}')
+    required = ['项目运行模板/state.schema.json', '项目运行模板/project_state.json', '项目运行模板/文件写权限矩阵.md', '项目运行模板/滚动摘要.md', '模板覆盖与契约矩阵.md']
+    for rel in required:
+        if not (ROOT / rel).is_file(): errors.append(f'missing semantic contract artifact: {rel}')
+    if errors:
+        print('SEMANTIC LINT FAIL:')
+        for error in errors: print('FAIL: ' + error, file=sys.stderr)
+        return False
+    print('SEMANTIC LINT PASS: cross-session assumptions, known permission conflicts, required schemas and reviewed template map.')
+    return True
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['build', 'verify'])
+    parser.add_argument('action', choices=['build', 'verify', 'lint'])
     action = parser.parse_args().action
-    if action == 'build': build()
-    return 0 if action == 'build' or verify() else 1
+    if action == 'build': build(); return 0
+    return 0 if (verify() if action == 'verify' else lint()) else 1
 if __name__ == '__main__': raise SystemExit(main())

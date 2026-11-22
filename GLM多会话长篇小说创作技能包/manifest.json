@@ -5,10 +5,10 @@
   "encoding": "UTF-8 without BOM",
   "character_count_method": "Unicode non-whitespace code points; punctuation counts; see 工具/字数统计.py",
   "inventory_excludes": "manifest.json itself (self-referential hash excluded)",
-  "file_count_excluding_manifest": 151,
-  "total_unicode_non_whitespace_characters_excluding_manifest": 108622,
+  "file_count_excluding_manifest": 159,
+  "total_unicode_non_whitespace_characters_excluding_manifest": 141513,
   "root_files": {
-    "01_自定义指令.md": 1061,
+    "01_自定义指令.md": 1103,
     "02_长期记忆.md": 476
   },
   "external_guides_not_in_zip": [
@@ -21,9 +21,9 @@
       "path": "01_自定义指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2980,
-      "unicode_non_whitespace_characters": 1061,
-      "sha256": "11542e4cacddd08a8860d1d08f0247af1129a721e168dd8ea425b5324891fb77"
+      "bytes": 3080,
+      "unicode_non_whitespace_characters": 1103,
+      "sha256": "b732f4d877ccd02cce27e3df97e73efedfe519cac11457e48b76101968a7a53b"
     },
     {
       "path": "02_长期记忆.md",
@@ -37,9 +37,9 @@
       "path": "作者01/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2587,
-      "unicode_non_whitespace_characters": 961,
-      "sha256": "d5c0bc1b76fe7af79efaa64404367b66a51b1d5a74fa3a6ba8e76c52e38a03e8"
+      "bytes": 2753,
+      "unicode_non_whitespace_characters": 1017,
+      "sha256": "08d1264d628136481bcc3378c7c8eada8b0dcb97d0404fe1ec4449a45d2c9f6e"
     },
     {
       "path": "作者01/会话指令.md",
@@ -109,9 +109,9 @@
       "path": "作者01/自检清单.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1127,
-      "unicode_non_whitespace_characters": 413,
-      "sha256": "88daa222c2ec41d23c24f274d172875446a23a2b4245eea228801d7d06eeedfb"
+      "bytes": 1177,
+      "unicode_non_whitespace_characters": 434,
+      "sha256": "0210e6d694964cabdd0c7d20a0289f65d68bcd0fd7db841b03f5cfbb0dab94c8"
     },
     {
       "path": "作者01/规范/执行规范.md",
@@ -133,9 +133,9 @@
       "path": "作者02/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2635,
-      "unicode_non_whitespace_characters": 973,
-      "sha256": "cbac505d96a2e47b4c6a0763b9ff34910f08bea6afa70cabbd8333071666fed1"
+      "bytes": 2801,
+      "unicode_non_whitespace_characters": 1029,
+      "sha256": "061d82f27ea5662ae72db6b05383b83c04c835a250fd96dbd94ef71d74ae8e29"
     },
     {
       "path": "作者02/会话指令.md",
@@ -221,17 +221,17 @@
       "path": "作者03/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2771,
-      "unicode_non_whitespace_characters": 1015,
-      "sha256": "eecf01c67dcc888482c5feac988c0b8317c987f00b3f210735aa4ae408ed58e6"
+      "bytes": 3057,
+      "unicode_non_whitespace_characters": 1111,
+      "sha256": "501d3d43fb12a8adca060924efde712882761cf5833a4b5708494a0dd3a2c1b5"
     },
     {
       "path": "作者03/会话指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3160,
-      "unicode_non_whitespace_characters": 1133,
-      "sha256": "8b5db56e6c1100685d790eb9251fa4b6d087f7fca6fcac17372f78ab2037d59b"
+      "bytes": 3275,
+      "unicode_non_whitespace_characters": 1172,
+      "sha256": "f875b6bbb5170b1c1a4aea907612f8582dacaf565a47148a7ffde0a983b72019"
     },
     {
       "path": "作者03/变更记录.md",
@@ -277,9 +277,9 @@
       "path": "作者03/模板/变更单.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 343,
-      "unicode_non_whitespace_characters": 124,
-      "sha256": "df3eb0505e44e50d337148baabdf106d7ad776145d2d621c53f11b29b9026342"
+      "bytes": 386,
+      "unicode_non_whitespace_characters": 139,
+      "sha256": "bc9fa783b5b730bc32708d6db9803b5fc38c4944ca3715b4caf434c283ba3e44"
     },
     {
       "path": "作者03/模板/时间线.md",
@@ -317,9 +317,9 @@
       "path": "作者03/规范/执行规范.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2024,
-      "unicode_non_whitespace_characters": 712,
-      "sha256": "e66b9c58654a7b38ced4d1f6d90f38f978ef2611f44378f06939b43a88dddbc2"
+      "bytes": 2141,
+      "unicode_non_whitespace_characters": 751,
+      "sha256": "1a8cb09d2c7dfe136a0917faa2a07df20380da5363e19d549b930ebad1383b37"
     },
     {
       "path": "作者03/输入输出契约.md",
@@ -333,17 +333,17 @@
       "path": "作者04/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2821,
-      "unicode_non_whitespace_characters": 1045,
-      "sha256": "c606d7021591809d7c97b7094fb9e6e50d0a65d4476166c94e12aa61d40c6ffd"
+      "bytes": 3039,
+      "unicode_non_whitespace_characters": 1122,
+      "sha256": "3c5a3200765676c19e7662650fd1dca0473b1a065821c6c6831780c8c6527b33"
     },
     {
       "path": "作者04/会话指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3155,
-      "unicode_non_whitespace_characters": 1146,
-      "sha256": "175bb062500011ddcf13394ce792816545c3e325aa36890513c843691e45246c"
+      "bytes": 3207,
+      "unicode_non_whitespace_characters": 1167,
+      "sha256": "9ea8d4335f6cd231ca043ec0e7d8cac81be85470ead582dd8130b0c394409ff4"
     },
     {
       "path": "作者04/变更记录.md",
@@ -373,9 +373,9 @@
       "path": "作者04/模板/双章章节卡.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 668,
-      "unicode_non_whitespace_characters": 249,
-      "sha256": "76741da2ca744e3866954b05067fddd9cbad10bac2275876e136eee5d50ce1f1"
+      "bytes": 718,
+      "unicode_non_whitespace_characters": 270,
+      "sha256": "4e7a4a0aee1504c9a9954c4e2ce39b4096efca3d6f1eac513429e30150a2561b"
     },
     {
       "path": "作者04/模板/章节卡执行差异表.md",
@@ -421,17 +421,17 @@
       "path": "作者04/输入输出契约.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2012,
-      "unicode_non_whitespace_characters": 735,
-      "sha256": "94766f9c7ed0127a8b1810f83d58ad76c4b83a60b0343edc21229d1e261558b8"
+      "bytes": 2064,
+      "unicode_non_whitespace_characters": 756,
+      "sha256": "990fa31c0cf4b83d88c59a9ad358eb11b17a15a304b08b70b613697c18cdb3b0"
     },
     {
       "path": "作者05/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2699,
-      "unicode_non_whitespace_characters": 1007,
-      "sha256": "0f61369c4a79dac36e6c5d1915aeeb481e69b52b74f5e031e60b6af903682f8c"
+      "bytes": 2950,
+      "unicode_non_whitespace_characters": 1095,
+      "sha256": "0a2c6706b1f0c349e19a0baedae77cb70fc9264bf5d9c2a5cbb0d761e22c0925"
     },
     {
       "path": "作者05/会话指令.md",
@@ -461,9 +461,9 @@
       "path": "作者05/模板/交接包.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 459,
-      "unicode_non_whitespace_characters": 159,
-      "sha256": "02621efa134b310b81f5cc915db5ae22eb2c22dbbf3021881d7e79832cd1817a"
+      "bytes": 726,
+      "unicode_non_whitespace_characters": 254,
+      "sha256": "1a9bf6156f19de47cfd7296115647dde9cafda423f36d9a7539a4fdcb6fb1265"
     },
     {
       "path": "作者05/模板/双章正文交付.md",
@@ -493,33 +493,33 @@
       "path": "作者05/自检清单.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 965,
-      "unicode_non_whitespace_characters": 343,
-      "sha256": "edeef18072d3b494b48602247da9cba89a59e48f2ae4a3a2241dfd54e3a02eac"
+      "bytes": 1110,
+      "unicode_non_whitespace_characters": 400,
+      "sha256": "fd684a28eeb7f2cb60366b9269a5ff9597deb3a2d745b9b67a0d78e25c27b92c"
     },
     {
       "path": "作者05/规范/执行规范.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1711,
-      "unicode_non_whitespace_characters": 613,
-      "sha256": "7dba1e052be5394d44e90cb6771ce00a4695dd70ce4ce95617c9d6b8b80c5556"
+      "bytes": 1761,
+      "unicode_non_whitespace_characters": 634,
+      "sha256": "efed3d28aade8c4f7ff048174c556fddcebd0549d6cc6c6f729afe3c0d8e2050"
     },
     {
       "path": "作者05/输入输出契约.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2198,
-      "unicode_non_whitespace_characters": 819,
-      "sha256": "eb342802bbb01039d45afe957c46946b1fca5d521b98968fcf277b8428deaefc"
+      "bytes": 2539,
+      "unicode_non_whitespace_characters": 941,
+      "sha256": "081cd398ae874cd89efcd5ccee7ac40daccd453f87587b3e96c3cc01c8084a64"
     },
     {
       "path": "作者06/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2708,
-      "unicode_non_whitespace_characters": 1004,
-      "sha256": "efba0e13f95251b9e366273b2a7956975f1d4bdea143a2df465f63f5ce569176"
+      "bytes": 2874,
+      "unicode_non_whitespace_characters": 1060,
+      "sha256": "5a5db0e02431d6cd62ed61dcafa2243faa3ddcafa0918fcfe5a5158c8650d218"
     },
     {
       "path": "作者06/会话指令.md",
@@ -605,17 +605,17 @@
       "path": "作者07/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2638,
-      "unicode_non_whitespace_characters": 994,
-      "sha256": "ec54173b4329a12307c68802583013993516a68bb30ec72bc6aa3134db0d11c5"
+      "bytes": 2929,
+      "unicode_non_whitespace_characters": 1093,
+      "sha256": "8916a943ad3b9ed7c9dbb510126808df066410d3433f7facfd74b67d54601bc7"
     },
     {
       "path": "作者07/会话指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3009,
-      "unicode_non_whitespace_characters": 1112,
-      "sha256": "216315bb19b33e970a0a168036e8fda498946535d7ec9eb37252db87f531fb23"
+      "bytes": 3376,
+      "unicode_non_whitespace_characters": 1237,
+      "sha256": "2720b1da0f4bf799e3798e5bd20fdce89f43703c4add4fa4ccdb65d0b7b7d1ee"
     },
     {
       "path": "作者07/变更记录.md",
@@ -629,9 +629,9 @@
       "path": "作者07/模板/AI味审计记录.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 552,
-      "unicode_non_whitespace_characters": 221,
-      "sha256": "0efc777b6c80f7a2f47a48f3086bd604b789a38dbef9025e55f9ef1be79c2fdc"
+      "bytes": 1548,
+      "unicode_non_whitespace_characters": 592,
+      "sha256": "60c7e6c403f6b8747d83ccbfcbdfc5b86a3dc612394e278dde6b2b84264e2b32"
     },
     {
       "path": "作者07/模板/专项产出记录.md",
@@ -677,33 +677,33 @@
       "path": "作者07/规范/执行规范.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1971,
-      "unicode_non_whitespace_characters": 715,
-      "sha256": "f0ab1f6019ed5b7d58e9e82aca77476167c92f432c8a376600b6120f7dfe3a60"
+      "bytes": 1989,
+      "unicode_non_whitespace_characters": 721,
+      "sha256": "78c0d5b7b224b5ea8fd8b3d32ab37e3f05c5a415bb233b901e4c197cc390a938"
     },
     {
       "path": "作者07/输入输出契约.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1879,
-      "unicode_non_whitespace_characters": 698,
-      "sha256": "3878a77d3ada8a914790e51870882d60a1ef422a73a244800139f51a227c55e9"
+      "bytes": 1897,
+      "unicode_non_whitespace_characters": 704,
+      "sha256": "6bb07a328de0030f43aeebc8b6b4f25cece1bdf2ca6b943c5587c535d43a3793"
     },
     {
       "path": "作者08/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2746,
-      "unicode_non_whitespace_characters": 1036,
-      "sha256": "e22825ea216174c8c2445375f2bdb2cbd125cc117371615073eea2ec4a39c972"
+      "bytes": 2912,
+      "unicode_non_whitespace_characters": 1092,
+      "sha256": "f62d70a28a570ce5adcdb80552e6c4db929b130d96ccb9dd20a09948e5e5d02d"
     },
     {
       "path": "作者08/会话指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1819,
-      "unicode_non_whitespace_characters": 649,
-      "sha256": "e9e56d48c0f3046516a06c05b6050103d935cf4718c7ce9b147ead1d34576a58"
+      "bytes": 2167,
+      "unicode_non_whitespace_characters": 780,
+      "sha256": "2b8951f5a7bfba91aa06f3aa9ac918b73fb3a03aebfb13eedd93a266ba7e0a0c"
     },
     {
       "path": "作者08/变更记录.md",
@@ -725,17 +725,17 @@
       "path": "作者08/模板/交接包.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 459,
-      "unicode_non_whitespace_characters": 159,
-      "sha256": "40eb94e704a2c90d64c7c7644aa568e897569dca0b462f03ea915c836346a496"
+      "bytes": 745,
+      "unicode_non_whitespace_characters": 269,
+      "sha256": "8b97b64275299393e9544a6e17dd6cff56c64325911bca576caf3de544d3db89"
     },
     {
       "path": "作者08/模板/每15章连续性报告.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 569,
-      "unicode_non_whitespace_characters": 212,
-      "sha256": "372c338ebe267dd040e9b7ce34c26009b7d4112d94ab40b2914e45951b158338"
+      "bytes": 1078,
+      "unicode_non_whitespace_characters": 407,
+      "sha256": "caf44cf57829aa1a47a16a5bde27650d07fbd147534e9cd14bbf9d9c364eafc7"
     },
     {
       "path": "作者08/示例/反例.md",
@@ -781,17 +781,17 @@
       "path": "作者09/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2598,
-      "unicode_non_whitespace_characters": 957,
-      "sha256": "d05369165ded5d1ccc88e30a1dee361c850871fb94d553af6d6c74cbeae2594d"
+      "bytes": 2928,
+      "unicode_non_whitespace_characters": 1069,
+      "sha256": "1633b50857f1442244efdd4dc9dd8a49303136066783fc6e477e25d3e9edcfef"
     },
     {
       "path": "作者09/会话指令.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2891,
-      "unicode_non_whitespace_characters": 1053,
-      "sha256": "b17b0c8923054b53d3e31b4d6e86fc1e3509cc0143b03f317d037a0ba3d9596f"
+      "bytes": 3055,
+      "unicode_non_whitespace_characters": 1109,
+      "sha256": "599ddd59a1cdd69000bb0ccfccb54041691ba7e86b200ae363d55247894b3238"
     },
     {
       "path": "作者09/变更记录.md",
@@ -813,17 +813,17 @@
       "path": "作者09/模板/交接包.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 459,
-      "unicode_non_whitespace_characters": 159,
-      "sha256": "9e5fdd8fd068ae997671da19e46c6229d71e9a840e8bdcdc3fc003d315b06181"
+      "bytes": 793,
+      "unicode_non_whitespace_characters": 295,
+      "sha256": "15eb99992deb6a12d5f6634b01b22bd435f5281838d31fe208b6e8b9efe17765"
     },
     {
       "path": "作者09/模板/定稿放行单.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1271,
-      "unicode_non_whitespace_characters": 484,
-      "sha256": "5d96bb88d70f49467e74c18e326a37cb52b58e9b2f844501815683abe9974b6a"
+      "bytes": 1442,
+      "unicode_non_whitespace_characters": 558,
+      "sha256": "3e9cc9563d6dfa00980f5010b44b7ec3fe81027ef83acbfc1fe9917bc48c9293"
     },
     {
       "path": "作者09/示例/反例.md",
@@ -861,17 +861,17 @@
       "path": "作者09/输入输出契约.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1795,
-      "unicode_non_whitespace_characters": 659,
-      "sha256": "f4fdc25a9fe85cf6691100f53895bccf846f4f3c2f8c1aefba214d2f73c8d308"
+      "bytes": 1959,
+      "unicode_non_whitespace_characters": 715,
+      "sha256": "986ee478125a8e4cb28ed7d6ad401ba7c1ef66f13688fb8d89ea419f26a6fd26"
     },
     {
       "path": "作者10/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3888,
-      "unicode_non_whitespace_characters": 1433,
-      "sha256": "23b4f60e717b33ccec2cf4abbcb545aea2051dd67d9d01c1154cf26f5c5537a3"
+      "bytes": 4054,
+      "unicode_non_whitespace_characters": 1489,
+      "sha256": "a7075651b65f89a2c9b53331c002c9703d786ac8f40f2d5d514cb2c10efc393a"
     },
     {
       "path": "作者10/会话指令.md",
@@ -981,9 +981,9 @@
       "path": "CHANGELOG.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1512,
-      "unicode_non_whitespace_characters": 563,
-      "sha256": "9aae31419141cd4db6fa080837b3ead5216d7a75c62b9b4a14685d7666dd85e4"
+      "bytes": 1996,
+      "unicode_non_whitespace_characters": 754,
+      "sha256": "bbb36790e4f49540e66bce94910b5884e371621724212a2689d3d4553c9b5a0c"
     },
     {
       "path": "LICENSE",
@@ -997,25 +997,33 @@
       "path": "P6验收报告.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3155,
-      "unicode_non_whitespace_characters": 1240,
-      "sha256": "d4a75bd5f81fb9e4a9974ccd90567eebc0bf9a260499576ad155de5a0c31c71e"
+      "bytes": 3753,
+      "unicode_non_whitespace_characters": 1497,
+      "sha256": "2664274fd954d7f446dcd9db612c241abf965d56404ad8a9f372039f83e1144c"
     },
     {
       "path": "README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 8847,
-      "unicode_non_whitespace_characters": 3306,
-      "sha256": "fa24c741c5540b54441a5a6bb88404caae2ebb651537e7a392e614d40855b658"
+      "bytes": 9576,
+      "unicode_non_whitespace_characters": 3677,
+      "sha256": "ce86933919a5a262cc4181f2ba10c311da9c4f4f67745ba60f97f096c0cfa67a"
     },
     {
       "path": "反模式库.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 4217,
-      "unicode_non_whitespace_characters": 1604,
-      "sha256": "761e229c0071eed8d680cd6d70b645dbcfd008e6b77c6d3d96a18259efdbf648"
+      "bytes": 4299,
+      "unicode_non_whitespace_characters": 1632,
+      "sha256": "f48369ac6a830a72608a23ce612ae5e42f7238366f547d5206b0b82db1d76b88"
+    },
+    {
+      "path": "工具/validate_state.py",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 10101,
+      "unicode_non_whitespace_characters": 8168,
+      "sha256": "028d6c6047ad9eaec9b7aa6f9e3aaa6bf32e3e89390adcdb1c256cf8895f0304"
     },
     {
       "path": "工具/字数统计.py",
@@ -1029,17 +1037,33 @@
       "path": "工具/构建与校验.py",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 7088,
-      "unicode_non_whitespace_characters": 5553,
-      "sha256": "58f21e93a7adb76f19b93136afd057c8b9ea6c5e51bebe2e96feb94c5f4eed76"
+      "bytes": 9205,
+      "unicode_non_whitespace_characters": 6979,
+      "sha256": "344784ada525af39f303f2d2e85aebe16fff231fc658ad561af2a183ecba9de3"
+    },
+    {
+      "path": "工具/校验摘要.py",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 2677,
+      "unicode_non_whitespace_characters": 2049,
+      "sha256": "6166d5b4fbfe2e3697ead54038c0cf94371f38252426da2df0cf95ddbf2861a0"
     },
     {
       "path": "工具/测试工具.py",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1879,
-      "unicode_non_whitespace_characters": 1503,
-      "sha256": "62ca19e5771a744331f9feb48e8ba9cfff442e2c45a4467af29d300684aa3b5d"
+      "bytes": 4164,
+      "unicode_non_whitespace_characters": 3104,
+      "sha256": "d5efa4b803d174595b97222966bd414e021699aef89e721ee180fde8016d84ca"
+    },
+    {
+      "path": "工具/重复检测.py",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 2545,
+      "unicode_non_whitespace_characters": 2067,
+      "sha256": "c8b0c3c11b4d27aaac6b75f3d498fb765f8e3de44a9fa8feb0b4fc53345bdbdb"
     },
     {
       "path": "方法论吸收映射表.md",
@@ -1053,17 +1077,25 @@
       "path": "构建日志.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2242,
-      "unicode_non_whitespace_characters": 825,
-      "sha256": "cdd24ec9c5c37b28408a1ddd2d1a5704f6c4c9a497c5dae71d465f8dc4316f3f"
+      "bytes": 2292,
+      "unicode_non_whitespace_characters": 846,
+      "sha256": "de09d38bae368c044626abd7ee3a117aa925cac43fac6597c112c547d5347344"
     },
     {
       "path": "核查问题处置矩阵.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 14481,
-      "unicode_non_whitespace_characters": 5511,
-      "sha256": "57fa6315b4a91406e228bf14d61a9d8956b05fb59bea6daca8882bf483f1a335"
+      "bytes": 25284,
+      "unicode_non_whitespace_characters": 9815,
+      "sha256": "690e158eae86b952454545c6bade8b213f5d96b37b1bb91fe0d1cbc56bded451"
+    },
+    {
+      "path": "模板覆盖与契约矩阵.md",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 6076,
+      "unicode_non_whitespace_characters": 2303,
+      "sha256": "5bc4a233a39ee2bd6ec99de06c3bbd24d87183b5b17dcccc36c69b66b34308bd"
     },
     {
       "path": "示例项目/README.md",
@@ -1109,17 +1141,17 @@
       "path": "设计决策记录.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 8248,
-      "unicode_non_whitespace_characters": 3213,
-      "sha256": "69c102e7f73c12f0ee6b07dc775141ecfaff2e63cd0d3260113636817e86cf60"
+      "bytes": 8398,
+      "unicode_non_whitespace_characters": 3276,
+      "sha256": "ce78e7672769cb5e9f9a692a9add831f4d70bab557a93932a1d4b90285267bd9"
     },
     {
       "path": "调研留痕/版本说明.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2074,
-      "unicode_non_whitespace_characters": 794,
-      "sha256": "d1dc2025820c50c9f4ecdaa7d9e215dc0603324b1bbc922aef6c74da5aebca2b"
+      "bytes": 2124,
+      "unicode_non_whitespace_characters": 815,
+      "sha256": "b09ac2755f2a0bc8cb438e8af2d2bfe7fe7715f912e6793677d3bf5565a87f70"
     },
     {
       "path": "调研留痕/研究综合总结.md",
@@ -1173,17 +1205,33 @@
       "path": "部署与运行手册.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 5017,
-      "unicode_non_whitespace_characters": 1822,
-      "sha256": "201559f13a4869f90b632440c4cb5c727c101457a84f241b77dc9e729985e783"
+      "bytes": 5448,
+      "unicode_non_whitespace_characters": 2035,
+      "sha256": "429b29ebfbc1203c710a209c582c999ee5243694c91b42bb786ab6cdac6fa713"
     },
     {
       "path": "需求追溯表.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 8400,
-      "unicode_non_whitespace_characters": 3385,
-      "sha256": "59d9e6a936c9ff6b54d6721fde0ff968c0ced9f6327b4827f49afc39f0c60016"
+      "bytes": 8450,
+      "unicode_non_whitespace_characters": 3406,
+      "sha256": "8ae72e370d9d50e2536bb274f6479100db6504222f213495ad06aca7070d67cc"
+    },
+    {
+      "path": "项目运行模板/project_state.json",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 1061,
+      "unicode_non_whitespace_characters": 692,
+      "sha256": "d0fef6e22f30816f5a112594d8b6ee90512ed57c2a3ec23804d141e6a91b1027"
+    },
+    {
+      "path": "项目运行模板/state.schema.json",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 7706,
+      "unicode_non_whitespace_characters": 4283,
+      "sha256": "00ec9c498b54c290139263113e3ebed808d45a0d7520c088c0e1edc7959838bf"
     },
     {
       "path": "项目运行模板/分卷大纲模板.md",
@@ -1194,12 +1242,28 @@
       "sha256": "b7a6934052e958b896c71998a97913b06e0547a3aef02150817eb2c578af8d62"
     },
     {
+      "path": "项目运行模板/文件写权限矩阵.md",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 3287,
+      "unicode_non_whitespace_characters": 1255,
+      "sha256": "780d5caf9dcb92099bd9a9a2cc0ee811fc087a38b5d7cbca00b25136d7f863bb"
+    },
+    {
+      "path": "项目运行模板/滚动摘要.md",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 1640,
+      "unicode_non_whitespace_characters": 613,
+      "sha256": "4756ff18b3b7aa52ec38e9e736481fc3eb529d8ff606c81509cba757da397f04"
+    },
+    {
       "path": "项目运行模板/续作迁移包.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1595,
-      "unicode_non_whitespace_characters": 557,
-      "sha256": "d200cbf31b767f7438595bc7d5ca49d7f00cbfe34b4238bea10472fd2d402dc4"
+      "bytes": 1645,
+      "unicode_non_whitespace_characters": 578,
+      "sha256": "2dfd48a2c7bfdf89c0fe7b63b9c4a06f3b42bbefeab5d6e6d693ce572d98e9f5"
     },
     {
       "path": "项目运行模板/质量进化索引.md",
@@ -1213,17 +1277,17 @@
       "path": "项目运行模板/项目状态索引.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 2245,
-      "unicode_non_whitespace_characters": 854,
-      "sha256": "d791891429ee63623654b3828cd04d514bc715e566c7d89191d816bfd11755bf"
+      "bytes": 3076,
+      "unicode_non_whitespace_characters": 1224,
+      "sha256": "2a3bed1f6f0371a3c007e2ffc01d2a3127bd6d6b9d8b09e5c01352434c0d1cad"
     },
     {
       "path": "项目运行模板/项目规模与节奏表.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3308,
-      "unicode_non_whitespace_characters": 1229,
-      "sha256": "0db9a1f3edcc41336873dbb8b8a3a9cc0dfdc311cb8aa5a64e0dbdd3038e079c"
+      "bytes": 3358,
+      "unicode_non_whitespace_characters": 1250,
+      "sha256": "003921f2b2aa54bea8c0415228b6755e647a2980419e4d52c6b78fa9c56b8d7e"
     }
   ]
 }
