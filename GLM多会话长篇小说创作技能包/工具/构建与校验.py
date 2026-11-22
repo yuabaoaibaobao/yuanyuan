@@ -10,6 +10,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ZIP_PATH = ROOT.parent / f'{ROOT.name}.zip'
+VERSION = '1.1.0'
+BUILD_DATE = '2026-11-22'  # Fixed for deterministic rebuilds of this release.
 EXTERNAL = ['用户使用指导/使用教程.md', '用户使用指导/导入检查单.md', '用户使用指导/故障排查表.md']
 FIRST = ['01_自定义指令.md', '02_长期记忆.md']
 
@@ -34,13 +36,13 @@ def record(path: Path) -> dict:
     raw = path.read_bytes()
     text = raw.decode('utf-8')
     rel = path.relative_to(ROOT).as_posix()
-    return {'path': rel, 'version': '1.1.0', 'encoding': 'UTF-8', 'bytes': len(raw),
+    return {'path': rel, 'version': VERSION, 'encoding': 'UTF-8', 'bytes': len(raw),
             'unicode_non_whitespace_characters': count_chars(text), 'sha256': hashlib.sha256(raw).hexdigest()}
 
 def build() -> None:
     paths = files_in_order()
     entries = [record(p) for p in paths]
-    manifest = {'package': ROOT.name, 'version': '1.1.0', 'generated_date_utc': __import__('datetime').date.today().isoformat(),
+    manifest = {'package': ROOT.name, 'version': VERSION, 'generated_date_utc': BUILD_DATE,
         'encoding': 'UTF-8 without BOM',
         'character_count_method': 'Unicode non-whitespace code points; punctuation counts; see 工具/字数统计.py',
         'inventory_excludes': 'manifest.json itself (self-referential hash excluded)',
@@ -49,10 +51,18 @@ def build() -> None:
         'root_files': {p: next(e['unicode_non_whitespace_characters'] for e in entries if e['path'] == p) for p in FIRST},
         'external_guides_not_in_zip': EXTERNAL, 'files': entries}
     (ROOT / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    def add_file(zf: zipfile.ZipFile, path: Path, arcname: str) -> None:
+        # Freeze ZIP timestamps and permissions so rebuilding the same release
+        # from unchanged sources yields identical archive bytes.
+        info = zipfile.ZipInfo(arcname, date_time=(2026, 11, 22, 0, 0, 0))
+        info.compress_type = zipfile.ZIP_DEFLATED
+        info.external_attr = 0o100644 << 16
+        zf.writestr(info, path.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+
     with zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
         for p in paths:
-            zf.write(p, p.relative_to(ROOT).as_posix())
-        zf.write(ROOT / 'manifest.json', 'manifest.json')
+            add_file(zf, p, p.relative_to(ROOT).as_posix())
+        add_file(zf, ROOT / 'manifest.json', 'manifest.json')
     print(f'Built {ZIP_PATH.name}: {len(entries)} files + manifest; {manifest["total_unicode_non_whitespace_characters_excluding_manifest"]:,} non-whitespace code points')
 
 def verify() -> bool:

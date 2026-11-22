@@ -2,6 +2,7 @@
 """Small stdlib regression tests for the included counting and bundle tools."""
 from __future__ import annotations
 from pathlib import Path
+import hashlib
 import runpy
 from types import SimpleNamespace
 import unittest
@@ -28,6 +29,11 @@ class CountTests(unittest.TestCase):
 class BundleTests(unittest.TestCase):
     def test_source_manifest_and_zip(self):
         self.assertTrue(bundle.verify())
+    def test_reproducible_build(self):
+        before = hashlib.sha256(bundle.ZIP_PATH.read_bytes()).hexdigest()
+        bundle.build()
+        after = hashlib.sha256(bundle.ZIP_PATH.read_bytes()).hexdigest()
+        self.assertEqual(before, after)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
