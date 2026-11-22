@@ -25,6 +25,11 @@ class CountTests(unittest.TestCase):
         self.assertTrue(2500 <= counter.count_chars('甲' * 2500) <= 4000)
         self.assertTrue(2500 <= counter.count_chars('甲' * 4000) <= 4000)
         self.assertFalse(2500 <= counter.count_chars('甲' * 4001) <= 4000)
+    def test_demo_pair_meets_chapter_length(self):
+        root = TOOLS.parent / '示例项目'
+        for name in ['第001章_演示正文.md', '第002章_演示正文.md']:
+            text = (root / name).read_text(encoding='utf-8')
+            self.assertTrue(2500 <= counter.count_chars(text) <= 4000, name)
 
 class BundleTests(unittest.TestCase):
     def test_source_manifest_and_zip(self):

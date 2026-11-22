@@ -5,8 +5,8 @@
   "encoding": "UTF-8 without BOM",
   "character_count_method": "Unicode non-whitespace code points; punctuation counts; see 工具/字数统计.py",
   "inventory_excludes": "manifest.json itself (self-referential hash excluded)",
-  "file_count_excluding_manifest": 149,
-  "total_unicode_non_whitespace_characters_excluding_manifest": 102951,
+  "file_count_excluding_manifest": 151,
+  "total_unicode_non_whitespace_characters_excluding_manifest": 108622,
   "root_files": {
     "01_自定义指令.md": 1061,
     "02_长期记忆.md": 476
@@ -981,9 +981,9 @@
       "path": "CHANGELOG.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1462,
-      "unicode_non_whitespace_characters": 541,
-      "sha256": "bcaaf3657689c0dc67cc81bde5d4489ede554483fa8bca4c54784ecbefa859ee"
+      "bytes": 1512,
+      "unicode_non_whitespace_characters": 563,
+      "sha256": "9aae31419141cd4db6fa080837b3ead5216d7a75c62b9b4a14685d7666dd85e4"
     },
     {
       "path": "LICENSE",
@@ -997,17 +997,17 @@
       "path": "P6验收报告.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 3091,
-      "unicode_non_whitespace_characters": 1210,
-      "sha256": "62f5d86abb7da7c493ab0ddfbbb6cda47b9be187ec82ebb6b2ebb4c5cc36e215"
+      "bytes": 3155,
+      "unicode_non_whitespace_characters": 1240,
+      "sha256": "d4a75bd5f81fb9e4a9974ccd90567eebc0bf9a260499576ad155de5a0c31c71e"
     },
     {
       "path": "README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 8739,
-      "unicode_non_whitespace_characters": 3262,
-      "sha256": "61c2cafdbc5217b3ab803cde045b4a6e18aba5d9a0e9d2b2aa93e3ba6f435382"
+      "bytes": 8847,
+      "unicode_non_whitespace_characters": 3306,
+      "sha256": "fa24c741c5540b54441a5a6bb88404caae2ebb651537e7a392e614d40855b658"
     },
     {
       "path": "反模式库.md",
@@ -1037,9 +1037,9 @@
       "path": "工具/测试工具.py",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1565,
-      "unicode_non_whitespace_characters": 1288,
-      "sha256": "06feacbea3c0746d1f1b9aa324218b9c4fe190fa285f3b042ed01bdf65113736"
+      "bytes": 1879,
+      "unicode_non_whitespace_characters": 1503,
+      "sha256": "62ca19e5771a744331f9feb48e8ba9cfff442e2c45a4467af29d300684aa3b5d"
     },
     {
       "path": "方法论吸收映射表.md",
@@ -1061,25 +1061,41 @@
       "path": "核查问题处置矩阵.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 14415,
-      "unicode_non_whitespace_characters": 5477,
-      "sha256": "e2721e99ceef1b3e80100049a81234a8fd2d9fcab482b4032266d44661729538"
+      "bytes": 14481,
+      "unicode_non_whitespace_characters": 5511,
+      "sha256": "57fa6315b4a91406e228bf14d61a9d8956b05fb59bea6daca8882bf483f1a335"
     },
     {
       "path": "示例项目/README.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1708,
-      "unicode_non_whitespace_characters": 637,
-      "sha256": "38a5d27fa248e7230be68670428d381c80c5b370c1ac4c85ca63e4a0a315bbd0"
+      "bytes": 2406,
+      "unicode_non_whitespace_characters": 911,
+      "sha256": "914f95ee6cac8341e3a8daf4544f7c3717eb454d7094e4db8e18d19a2df41531"
+    },
+    {
+      "path": "示例项目/第001章_演示正文.md",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 7570,
+      "unicode_non_whitespace_characters": 2505,
+      "sha256": "a9dc8fda58744bb0367379fc433f6f53fa32ec492b0bb27ed2faa3dd3f74bc68"
+    },
+    {
+      "path": "示例项目/第002章_演示正文.md",
+      "version": "1.1.0",
+      "encoding": "UTF-8",
+      "bytes": 7785,
+      "unicode_non_whitespace_characters": 2570,
+      "sha256": "7a4f7ec6876073313326d4ae78f2fd4918113cc5f3d8721dd80797449961b988"
     },
     {
       "path": "示例项目/项目状态索引_演示.md",
       "version": "1.1.0",
       "encoding": "UTF-8",
-      "bytes": 1340,
-      "unicode_non_whitespace_characters": 585,
-      "sha256": "d11cb4a47b1924408d6d860598a5129c52f10b0e94e4a4980576b9b3ef8406e1"
+      "bytes": 1390,
+      "unicode_non_whitespace_characters": 562,
+      "sha256": "b89adcc6878f8d41cb93eb98c48fb92d0b5cf5a01f53cc8b2b426f4b0d32d634"
     },
     {
       "path": "许可证.md",
