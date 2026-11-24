@@ -171,7 +171,9 @@ class BundleTests(unittest.TestCase):
             clone = Path(tmp) / 'kit'
             shutil.copytree(ROOT, clone, ignore=shutil.ignore_patterns('__pycache__', '项目工作区'))
             readme = clone / 'README.md'
-            text = readme.read_text(encoding='utf-8').replace('版本 1.1.2', '版本 1.1.1 与 1.1.2', 1)
+            # 版本号取自release.json，避免升版时本测试硬编码失效。
+            current = bundle.VERSION
+            text = readme.read_text(encoding='utf-8').replace(f'版本 {current}', f'版本 1.1.1 与 {current}', 1)
             readme.write_text(text, encoding='utf-8')
             result = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'lint'], capture_output=True, text=True)
         self.assertEqual(result.returncode, 1)

@@ -1,14 +1,14 @@
 {
   "package": "GLM多会话长篇小说创作技能包",
-  "version": "1.1.2",
-  "generated_date_utc": "2026-11-22",
+  "version": "1.2.0",
+  "generated_date_utc": "2026-11-24",
   "encoding": "UTF-8 without BOM",
   "file_code_point_count_method": "Full UTF-8 file text; Unicode non-whitespace code points; punctuation and Markdown framing count. Not chapter prose count.",
   "inventory_excludes": "manifest.json itself (self-referential hash excluded); project workspace paths; canonical package ZIP if stored inside source folder",
-  "file_count_excluding_manifest": 147,
-  "total_unicode_non_whitespace_file_code_points_excluding_manifest": 136315,
+  "file_count_excluding_manifest": 150,
+  "total_unicode_non_whitespace_file_code_points_excluding_manifest": 147664,
   "root_files": {
-    "01_自定义指令.md": 1103,
+    "01_自定义指令.md": 1216,
     "02_长期记忆.md": 476
   },
   "external_guides_not_in_zip": [
@@ -19,15 +19,15 @@
   "files": [
     {
       "path": "01_自定义指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 3054,
-      "unicode_non_whitespace_file_code_points": 1103,
-      "sha256": "fbd0df5c250bb0659fa86533df94b727d461c4bb319c11e1ec92afabd85892f0"
+      "bytes": 3394,
+      "unicode_non_whitespace_file_code_points": 1216,
+      "sha256": "e00b5d255dd475d383390af28594cd8e7dd799afaf25b8f83225d1d3205e9482"
     },
     {
       "path": "02_长期记忆.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1417,
       "unicode_non_whitespace_file_code_points": 476,
@@ -35,7 +35,7 @@
     },
     {
       "path": "作者01/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2753,
       "unicode_non_whitespace_file_code_points": 1017,
@@ -43,7 +43,7 @@
     },
     {
       "path": "作者01/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3037,
       "unicode_non_whitespace_file_code_points": 1100,
@@ -51,7 +51,7 @@
     },
     {
       "path": "作者01/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 850,
       "unicode_non_whitespace_file_code_points": 358,
@@ -59,7 +59,7 @@
     },
     {
       "path": "作者01/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 424,
       "unicode_non_whitespace_file_code_points": 157,
@@ -67,7 +67,7 @@
     },
     {
       "path": "作者01/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -75,7 +75,7 @@
     },
     {
       "path": "作者01/模板/写书口径确认单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 575,
       "unicode_non_whitespace_file_code_points": 234,
@@ -83,7 +83,7 @@
     },
     {
       "path": "作者01/模板/风格指纹表.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 940,
       "unicode_non_whitespace_file_code_points": 325,
@@ -91,7 +91,7 @@
     },
     {
       "path": "作者01/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 447,
       "unicode_non_whitespace_file_code_points": 153,
@@ -99,7 +99,7 @@
     },
     {
       "path": "作者01/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 422,
       "unicode_non_whitespace_file_code_points": 144,
@@ -107,7 +107,7 @@
     },
     {
       "path": "作者01/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1177,
       "unicode_non_whitespace_file_code_points": 434,
@@ -115,7 +115,7 @@
     },
     {
       "path": "作者01/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1363,
       "unicode_non_whitespace_file_code_points": 480,
@@ -123,7 +123,7 @@
     },
     {
       "path": "作者01/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1927,
       "unicode_non_whitespace_file_code_points": 700,
@@ -131,7 +131,7 @@
     },
     {
       "path": "作者02/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2801,
       "unicode_non_whitespace_file_code_points": 1029,
@@ -139,7 +139,7 @@
     },
     {
       "path": "作者02/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3117,
       "unicode_non_whitespace_file_code_points": 1126,
@@ -147,7 +147,7 @@
     },
     {
       "path": "作者02/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 829,
       "unicode_non_whitespace_file_code_points": 345,
@@ -155,7 +155,7 @@
     },
     {
       "path": "作者02/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 396,
       "unicode_non_whitespace_file_code_points": 167,
@@ -163,7 +163,7 @@
     },
     {
       "path": "作者02/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -171,7 +171,7 @@
     },
     {
       "path": "作者02/模板/检索回传.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 404,
       "unicode_non_whitespace_file_code_points": 145,
@@ -179,7 +179,7 @@
     },
     {
       "path": "作者02/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 438,
       "unicode_non_whitespace_file_code_points": 150,
@@ -187,7 +187,7 @@
     },
     {
       "path": "作者02/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 359,
       "unicode_non_whitespace_file_code_points": 123,
@@ -195,7 +195,7 @@
     },
     {
       "path": "作者02/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 926,
       "unicode_non_whitespace_file_code_points": 330,
@@ -203,7 +203,7 @@
     },
     {
       "path": "作者02/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2374,
       "unicode_non_whitespace_file_code_points": 840,
@@ -211,7 +211,7 @@
     },
     {
       "path": "作者02/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2003,
       "unicode_non_whitespace_file_code_points": 722,
@@ -219,7 +219,7 @@
     },
     {
       "path": "作者03/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3057,
       "unicode_non_whitespace_file_code_points": 1111,
@@ -227,7 +227,7 @@
     },
     {
       "path": "作者03/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3275,
       "unicode_non_whitespace_file_code_points": 1172,
@@ -235,7 +235,7 @@
     },
     {
       "path": "作者03/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 786,
       "unicode_non_whitespace_file_code_points": 326,
@@ -243,7 +243,7 @@
     },
     {
       "path": "作者03/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 400,
       "unicode_non_whitespace_file_code_points": 145,
@@ -251,7 +251,7 @@
     },
     {
       "path": "作者03/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -259,7 +259,7 @@
     },
     {
       "path": "作者03/模板/人物知识边界.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 215,
       "unicode_non_whitespace_file_code_points": 96,
@@ -267,7 +267,7 @@
     },
     {
       "path": "作者03/模板/伏笔清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 287,
       "unicode_non_whitespace_file_code_points": 132,
@@ -275,7 +275,7 @@
     },
     {
       "path": "作者03/模板/变更单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 386,
       "unicode_non_whitespace_file_code_points": 139,
@@ -283,7 +283,7 @@
     },
     {
       "path": "作者03/模板/时间线.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 222,
       "unicode_non_whitespace_file_code_points": 105,
@@ -291,7 +291,7 @@
     },
     {
       "path": "作者03/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 438,
       "unicode_non_whitespace_file_code_points": 150,
@@ -299,7 +299,7 @@
     },
     {
       "path": "作者03/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 358,
       "unicode_non_whitespace_file_code_points": 134,
@@ -307,7 +307,7 @@
     },
     {
       "path": "作者03/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 995,
       "unicode_non_whitespace_file_code_points": 355,
@@ -315,7 +315,7 @@
     },
     {
       "path": "作者03/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2141,
       "unicode_non_whitespace_file_code_points": 751,
@@ -323,7 +323,7 @@
     },
     {
       "path": "作者03/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2028,
       "unicode_non_whitespace_file_code_points": 725,
@@ -331,7 +331,7 @@
     },
     {
       "path": "作者04/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3039,
       "unicode_non_whitespace_file_code_points": 1122,
@@ -339,7 +339,7 @@
     },
     {
       "path": "作者04/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3207,
       "unicode_non_whitespace_file_code_points": 1167,
@@ -347,7 +347,7 @@
     },
     {
       "path": "作者04/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 818,
       "unicode_non_whitespace_file_code_points": 342,
@@ -355,7 +355,7 @@
     },
     {
       "path": "作者04/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 446,
       "unicode_non_whitespace_file_code_points": 189,
@@ -363,7 +363,7 @@
     },
     {
       "path": "作者04/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -371,7 +371,7 @@
     },
     {
       "path": "作者04/模板/双章章节卡.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 718,
       "unicode_non_whitespace_file_code_points": 270,
@@ -379,7 +379,7 @@
     },
     {
       "path": "作者04/模板/章节卡执行差异表.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 166,
       "unicode_non_whitespace_file_code_points": 75,
@@ -387,7 +387,7 @@
     },
     {
       "path": "作者04/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 444,
       "unicode_non_whitespace_file_code_points": 152,
@@ -395,7 +395,7 @@
     },
     {
       "path": "作者04/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 333,
       "unicode_non_whitespace_file_code_points": 121,
@@ -403,7 +403,7 @@
     },
     {
       "path": "作者04/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 982,
       "unicode_non_whitespace_file_code_points": 356,
@@ -411,7 +411,7 @@
     },
     {
       "path": "作者04/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1897,
       "unicode_non_whitespace_file_code_points": 669,
@@ -419,7 +419,7 @@
     },
     {
       "path": "作者04/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2064,
       "unicode_non_whitespace_file_code_points": 756,
@@ -427,7 +427,7 @@
     },
     {
       "path": "作者05/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2950,
       "unicode_non_whitespace_file_code_points": 1095,
@@ -435,7 +435,7 @@
     },
     {
       "path": "作者05/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 4194,
       "unicode_non_whitespace_file_code_points": 1562,
@@ -443,7 +443,7 @@
     },
     {
       "path": "作者05/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 830,
       "unicode_non_whitespace_file_code_points": 346,
@@ -451,7 +451,7 @@
     },
     {
       "path": "作者05/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 360,
       "unicode_non_whitespace_file_code_points": 131,
@@ -459,7 +459,7 @@
     },
     {
       "path": "作者05/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 726,
       "unicode_non_whitespace_file_code_points": 254,
@@ -467,7 +467,7 @@
     },
     {
       "path": "作者05/模板/双章正文交付.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1469,
       "unicode_non_whitespace_file_code_points": 562,
@@ -475,7 +475,7 @@
     },
     {
       "path": "作者05/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 425,
       "unicode_non_whitespace_file_code_points": 147,
@@ -483,7 +483,7 @@
     },
     {
       "path": "作者05/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 418,
       "unicode_non_whitespace_file_code_points": 146,
@@ -491,7 +491,7 @@
     },
     {
       "path": "作者05/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1110,
       "unicode_non_whitespace_file_code_points": 400,
@@ -499,7 +499,7 @@
     },
     {
       "path": "作者05/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1761,
       "unicode_non_whitespace_file_code_points": 634,
@@ -507,7 +507,7 @@
     },
     {
       "path": "作者05/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2539,
       "unicode_non_whitespace_file_code_points": 941,
@@ -515,7 +515,7 @@
     },
     {
       "path": "作者06/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2874,
       "unicode_non_whitespace_file_code_points": 1060,
@@ -523,7 +523,7 @@
     },
     {
       "path": "作者06/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3058,
       "unicode_non_whitespace_file_code_points": 1115,
@@ -531,7 +531,7 @@
     },
     {
       "path": "作者06/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 801,
       "unicode_non_whitespace_file_code_points": 333,
@@ -539,7 +539,7 @@
     },
     {
       "path": "作者06/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 371,
       "unicode_non_whitespace_file_code_points": 153,
@@ -547,7 +547,7 @@
     },
     {
       "path": "作者06/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -555,7 +555,7 @@
     },
     {
       "path": "作者06/模板/去味润色自评卡.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 436,
       "unicode_non_whitespace_file_code_points": 159,
@@ -563,7 +563,7 @@
     },
     {
       "path": "作者06/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 420,
       "unicode_non_whitespace_file_code_points": 144,
@@ -571,7 +571,7 @@
     },
     {
       "path": "作者06/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 417,
       "unicode_non_whitespace_file_code_points": 149,
@@ -579,7 +579,7 @@
     },
     {
       "path": "作者06/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 948,
       "unicode_non_whitespace_file_code_points": 338,
@@ -587,7 +587,7 @@
     },
     {
       "path": "作者06/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1951,
       "unicode_non_whitespace_file_code_points": 683,
@@ -595,7 +595,7 @@
     },
     {
       "path": "作者06/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1954,
       "unicode_non_whitespace_file_code_points": 717,
@@ -603,7 +603,7 @@
     },
     {
       "path": "作者07/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3005,
       "unicode_non_whitespace_file_code_points": 1119,
@@ -611,7 +611,7 @@
     },
     {
       "path": "作者07/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3383,
       "unicode_non_whitespace_file_code_points": 1238,
@@ -619,7 +619,7 @@
     },
     {
       "path": "作者07/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1015,
       "unicode_non_whitespace_file_code_points": 426,
@@ -627,7 +627,7 @@
     },
     {
       "path": "作者07/模板/AI味审计记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3766,
       "unicode_non_whitespace_file_code_points": 1366,
@@ -635,7 +635,7 @@
     },
     {
       "path": "作者07/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 429,
       "unicode_non_whitespace_file_code_points": 175,
@@ -643,7 +643,7 @@
     },
     {
       "path": "作者07/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -651,7 +651,7 @@
     },
     {
       "path": "作者07/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 429,
       "unicode_non_whitespace_file_code_points": 147,
@@ -659,7 +659,7 @@
     },
     {
       "path": "作者07/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 346,
       "unicode_non_whitespace_file_code_points": 128,
@@ -667,7 +667,7 @@
     },
     {
       "path": "作者07/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1264,
       "unicode_non_whitespace_file_code_points": 450,
@@ -675,7 +675,7 @@
     },
     {
       "path": "作者07/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2118,
       "unicode_non_whitespace_file_code_points": 766,
@@ -683,7 +683,7 @@
     },
     {
       "path": "作者07/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2130,
       "unicode_non_whitespace_file_code_points": 781,
@@ -691,7 +691,7 @@
     },
     {
       "path": "作者08/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2912,
       "unicode_non_whitespace_file_code_points": 1092,
@@ -699,7 +699,7 @@
     },
     {
       "path": "作者08/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3812,
       "unicode_non_whitespace_file_code_points": 1404,
@@ -707,7 +707,7 @@
     },
     {
       "path": "作者08/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1039,
       "unicode_non_whitespace_file_code_points": 440,
@@ -715,7 +715,7 @@
     },
     {
       "path": "作者08/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 443,
       "unicode_non_whitespace_file_code_points": 183,
@@ -723,7 +723,7 @@
     },
     {
       "path": "作者08/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 745,
       "unicode_non_whitespace_file_code_points": 269,
@@ -731,7 +731,7 @@
     },
     {
       "path": "作者08/模板/每15章连续性报告.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1078,
       "unicode_non_whitespace_file_code_points": 407,
@@ -739,7 +739,7 @@
     },
     {
       "path": "作者08/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 429,
       "unicode_non_whitespace_file_code_points": 147,
@@ -747,7 +747,7 @@
     },
     {
       "path": "作者08/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 402,
       "unicode_non_whitespace_file_code_points": 160,
@@ -755,7 +755,7 @@
     },
     {
       "path": "作者08/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 941,
       "unicode_non_whitespace_file_code_points": 335,
@@ -763,7 +763,7 @@
     },
     {
       "path": "作者08/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3775,
       "unicode_non_whitespace_file_code_points": 1381,
@@ -771,7 +771,7 @@
     },
     {
       "path": "作者08/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2012,
       "unicode_non_whitespace_file_code_points": 744,
@@ -779,7 +779,7 @@
     },
     {
       "path": "作者09/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2928,
       "unicode_non_whitespace_file_code_points": 1069,
@@ -787,7 +787,7 @@
     },
     {
       "path": "作者09/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3055,
       "unicode_non_whitespace_file_code_points": 1109,
@@ -795,7 +795,7 @@
     },
     {
       "path": "作者09/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 790,
       "unicode_non_whitespace_file_code_points": 342,
@@ -803,7 +803,7 @@
     },
     {
       "path": "作者09/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 358,
       "unicode_non_whitespace_file_code_points": 139,
@@ -811,7 +811,7 @@
     },
     {
       "path": "作者09/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 793,
       "unicode_non_whitespace_file_code_points": 295,
@@ -819,7 +819,7 @@
     },
     {
       "path": "作者09/模板/定稿放行单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1442,
       "unicode_non_whitespace_file_code_points": 558,
@@ -827,7 +827,7 @@
     },
     {
       "path": "作者09/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 436,
       "unicode_non_whitespace_file_code_points": 152,
@@ -835,7 +835,7 @@
     },
     {
       "path": "作者09/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 362,
       "unicode_non_whitespace_file_code_points": 152,
@@ -843,7 +843,7 @@
     },
     {
       "path": "作者09/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 914,
       "unicode_non_whitespace_file_code_points": 326,
@@ -851,7 +851,7 @@
     },
     {
       "path": "作者09/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1749,
       "unicode_non_whitespace_file_code_points": 627,
@@ -859,7 +859,7 @@
     },
     {
       "path": "作者09/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1959,
       "unicode_non_whitespace_file_code_points": 715,
@@ -867,7 +867,7 @@
     },
     {
       "path": "作者10/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 4054,
       "unicode_non_whitespace_file_code_points": 1489,
@@ -875,7 +875,7 @@
     },
     {
       "path": "作者10/会话指令.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3599,
       "unicode_non_whitespace_file_code_points": 1328,
@@ -883,7 +883,7 @@
     },
     {
       "path": "作者10/变更记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 796,
       "unicode_non_whitespace_file_code_points": 332,
@@ -891,7 +891,7 @@
     },
     {
       "path": "作者10/模板/专项产出记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 390,
       "unicode_non_whitespace_file_code_points": 155,
@@ -899,7 +899,7 @@
     },
     {
       "path": "作者10/模板/交接包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 459,
       "unicode_non_whitespace_file_code_points": 159,
@@ -907,7 +907,7 @@
     },
     {
       "path": "作者10/模板/全书健康报告.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 642,
       "unicode_non_whitespace_file_code_points": 227,
@@ -915,7 +915,7 @@
     },
     {
       "path": "作者10/模板/卷末债务报告.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 929,
       "unicode_non_whitespace_file_code_points": 348,
@@ -923,7 +923,7 @@
     },
     {
       "path": "作者10/模板/每15章趋势报告.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 984,
       "unicode_non_whitespace_file_code_points": 372,
@@ -931,7 +931,7 @@
     },
     {
       "path": "作者10/模板/质量账本记录.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 552,
       "unicode_non_whitespace_file_code_points": 212,
@@ -939,7 +939,7 @@
     },
     {
       "path": "作者10/示例/反例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 414,
       "unicode_non_whitespace_file_code_points": 142,
@@ -947,7 +947,7 @@
     },
     {
       "path": "作者10/示例/正例.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 403,
       "unicode_non_whitespace_file_code_points": 149,
@@ -955,7 +955,7 @@
     },
     {
       "path": "作者10/自检清单.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 922,
       "unicode_non_whitespace_file_code_points": 328,
@@ -963,7 +963,7 @@
     },
     {
       "path": "作者10/规范/执行规范.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2068,
       "unicode_non_whitespace_file_code_points": 750,
@@ -971,7 +971,7 @@
     },
     {
       "path": "作者10/输入输出契约.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2309,
       "unicode_non_whitespace_file_code_points": 864,
@@ -979,15 +979,15 @@
     },
     {
       "path": "CHANGELOG.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 4210,
-      "unicode_non_whitespace_file_code_points": 1630,
-      "sha256": "06bfac6684104a5cc2948583ad514dfe93d0a8175b7be56cae79e6316f59352d"
+      "bytes": 6014,
+      "unicode_non_whitespace_file_code_points": 2337,
+      "sha256": "5dea9772ad9ab9dad329f0960e489c64723d2b7bf21225a9d617a65de590d735"
     },
     {
       "path": "LICENSE",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1116,
       "unicode_non_whitespace_file_code_points": 937,
@@ -995,31 +995,31 @@
     },
     {
       "path": "P6验收报告.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 4186,
-      "unicode_non_whitespace_file_code_points": 1770,
-      "sha256": "c07ae5f2aa8506db35db4ebfcc25c1b4976c25b9790b332e752297a36f8bf04f"
+      "bytes": 4575,
+      "unicode_non_whitespace_file_code_points": 1922,
+      "sha256": "ddb58548adb5d84131d070db841bf81504dfd2bc755139dd0f01ab5a57058c1b"
     },
     {
       "path": "README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 11698,
-      "unicode_non_whitespace_file_code_points": 4714,
-      "sha256": "8e7a49641fb69355e065c6b37eace8aa0931da486158cfea0df1cd87f136b01c"
+      "bytes": 12134,
+      "unicode_non_whitespace_file_code_points": 4888,
+      "sha256": "26e962a58725156a52ebc6e25fab4e29e20d7961fceb3a8087cca676d21b6672"
     },
     {
       "path": "release.json",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 86,
       "unicode_non_whitespace_file_code_points": 72,
-      "sha256": "008a49e7e4e2d5c6a598a70d7ed6943180f496e58fbc08fa175dd52c34eced99"
+      "sha256": "213a8acdd4980d6601de29efc685fd580d1c6afb3c0f1fb13eeda705bd7dd25d"
     },
     {
       "path": "反模式库.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 4299,
       "unicode_non_whitespace_file_code_points": 1632,
@@ -1027,23 +1027,39 @@
     },
     {
       "path": "工具/validate_state.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 14349,
       "unicode_non_whitespace_file_code_points": 11379,
       "sha256": "19da83981edc5fb6ad274ff305e0d2ba2fa1724f09fbce74014ac9f50fdd60b3"
     },
     {
+      "path": "工具/字数统计.html",
+      "version": "1.2.0",
+      "encoding": "UTF-8",
+      "bytes": 5335,
+      "unicode_non_whitespace_file_code_points": 3685,
+      "sha256": "b1c06ad704d521db42f3bd557960965ce3ce5a6c41975f7a054e721e55996059"
+    },
+    {
       "path": "工具/字数统计.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3995,
       "unicode_non_whitespace_file_code_points": 2835,
       "sha256": "32055b8aba707126a0b138520e683a73699025f2376d78892742fa19838ffd6b"
     },
     {
+      "path": "工具/拍平映射.py",
+      "version": "1.2.0",
+      "encoding": "UTF-8",
+      "bytes": 6209,
+      "unicode_non_whitespace_file_code_points": 4072,
+      "sha256": "c366315cd1867149191f7a44d05d87c78a2adde12e4732e0406a64946249aef9"
+    },
+    {
       "path": "工具/构建与校验.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 17067,
       "unicode_non_whitespace_file_code_points": 13372,
@@ -1051,7 +1067,7 @@
     },
     {
       "path": "工具/校验摘要.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2677,
       "unicode_non_whitespace_file_code_points": 2049,
@@ -1059,23 +1075,31 @@
     },
     {
       "path": "工具/测试工具.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 17674,
-      "unicode_non_whitespace_file_code_points": 13428,
-      "sha256": "2e4c357bcfc3a5cc49455a91a535cd2a82d23b471e6e7620f957ac83361b644b"
+      "bytes": 17808,
+      "unicode_non_whitespace_file_code_points": 13493,
+      "sha256": "e21f715f17b19e353c29496fda7217874c20f775213b9336d62ad4f224ebfdfc"
     },
     {
       "path": "工具/重复检测.py",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2669,
       "unicode_non_whitespace_file_code_points": 2178,
       "sha256": "d15b5970ab1bd98cac66ddbc1359492982ca52d104dae7ee34f475577f67b2c3"
     },
     {
+      "path": "清言平台适配说明.md",
+      "version": "1.2.0",
+      "encoding": "UTF-8",
+      "bytes": 5240,
+      "unicode_non_whitespace_file_code_points": 2007,
+      "sha256": "f2994ac18c6b7fc3920a5e1ebd8ef01699e8becdf19db0df5dc63dcf832ba655"
+    },
+    {
       "path": "示例项目/README.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 2406,
       "unicode_non_whitespace_file_code_points": 911,
@@ -1083,7 +1107,7 @@
     },
     {
       "path": "示例项目/第001章_演示正文.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 7570,
       "unicode_non_whitespace_file_code_points": 2505,
@@ -1091,7 +1115,7 @@
     },
     {
       "path": "示例项目/第002章_演示正文.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 7785,
       "unicode_non_whitespace_file_code_points": 2570,
@@ -1099,7 +1123,7 @@
     },
     {
       "path": "示例项目/项目状态索引_演示.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1559,
       "unicode_non_whitespace_file_code_points": 607,
@@ -1107,7 +1131,7 @@
     },
     {
       "path": "许可证.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1737,
       "unicode_non_whitespace_file_code_points": 641,
@@ -1115,15 +1139,15 @@
     },
     {
       "path": "部署与运行手册.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
-      "bytes": 5791,
-      "unicode_non_whitespace_file_code_points": 2243,
-      "sha256": "129066d99aa1a35923ea53d8b60320871c03dc37790a85e3a5b01268ed85074f"
+      "bytes": 6684,
+      "unicode_non_whitespace_file_code_points": 2617,
+      "sha256": "7688fc411dd5ec54a98375f7adc65c16ddbada043071c814ea03f20b0679848b"
     },
     {
       "path": "项目运行模板/project_state.json",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1061,
       "unicode_non_whitespace_file_code_points": 692,
@@ -1131,7 +1155,7 @@
     },
     {
       "path": "项目运行模板/state.schema.json",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 8212,
       "unicode_non_whitespace_file_code_points": 4547,
@@ -1139,7 +1163,7 @@
     },
     {
       "path": "项目运行模板/分卷大纲模板.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1184,
       "unicode_non_whitespace_file_code_points": 439,
@@ -1147,7 +1171,7 @@
     },
     {
       "path": "项目运行模板/文件写权限矩阵.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3287,
       "unicode_non_whitespace_file_code_points": 1255,
@@ -1155,7 +1179,7 @@
     },
     {
       "path": "项目运行模板/滚动摘要.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1640,
       "unicode_non_whitespace_file_code_points": 613,
@@ -1163,7 +1187,7 @@
     },
     {
       "path": "项目运行模板/续作迁移包.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1645,
       "unicode_non_whitespace_file_code_points": 578,
@@ -1171,7 +1195,7 @@
     },
     {
       "path": "项目运行模板/质量进化索引.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 1331,
       "unicode_non_whitespace_file_code_points": 506,
@@ -1179,7 +1203,7 @@
     },
     {
       "path": "项目运行模板/项目状态索引.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3076,
       "unicode_non_whitespace_file_code_points": 1224,
@@ -1187,7 +1211,7 @@
     },
     {
       "path": "项目运行模板/项目规模与节奏表.md",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "encoding": "UTF-8",
       "bytes": 3358,
       "unicode_non_whitespace_file_code_points": 1250,
