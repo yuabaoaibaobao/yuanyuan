@@ -179,10 +179,11 @@ def validate(data: object, root_dir: Optional[Path] = None) -> list[str]:
             except ValueError: errors.append(f'files[{i}].logical_path escapes --root'); continue
             if not target.is_file(): errors.append(f'files[{i}].logical_path does not exist under --root: {rel}'); continue
             digest = hashlib.sha256(target.read_bytes()).hexdigest()
-            if item.get('sha256') != '未知' and item.get('sha256') != digest:
+            if item.get('sha256') == '未知':
+                if isinstance(gates, dict) and gates.get('release_09') == '通过':
+                    errors.append(f'files[{i}].sha256 must be recorded before release: {rel}')
+            elif item.get('sha256') != digest:
                 errors.append(f'files[{i}].sha256 does not match file bytes: {rel}')
-            elif item.get('sha256') == '未知' and isinstance(gates, dict) and gates.get('release_09') == '通过':
-                errors.append(f'files[{i}].sha256 must be recorded before release: {rel}')
     return errors
 
 
@@ -199,8 +200,13 @@ def main() -> int:
         for error in errors: print('FAIL: ' + error, file=sys.stderr)
         return 1
     print(f'PASS: declared JSON-Schema subset and structural/gate rules validated ({args.state}).')
-    if args.root is not None: print(f'PASS: registered file paths and known SHA-256 values checked under {args.root}.')
-    else: print('NOTE: registered file paths and hashes were not checked; pass --root <project-workspace> to check them.')
+    if args.root is not None:
+        registered = data.get('files', []) if isinstance(data.get('files', []), list) else []
+        known = sum(isinstance(item, dict) and item.get('sha256') != '未知' for item in registered)
+        unknown = sum(isinstance(item, dict) and item.get('sha256') == '未知' for item in registered)
+        print(f'PASS: registered paths checked: {len(registered)}; known SHA-256 values matched: {known}; unknown hashes not checked: {unknown} (root: {args.root}).')
+    else:
+        print('NOTE: registered file paths and hashes were not checked; pass --root <project-workspace> to check them.')
     return 0
 
 if __name__ == '__main__': raise SystemExit(main())

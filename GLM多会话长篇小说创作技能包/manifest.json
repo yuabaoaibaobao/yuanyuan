@@ -4,9 +4,9 @@
   "generated_date_utc": "2026-11-22",
   "encoding": "UTF-8 without BOM",
   "file_code_point_count_method": "Full UTF-8 file text; Unicode non-whitespace code points; punctuation and Markdown framing count. Not chapter prose count.",
-  "inventory_excludes": "manifest.json itself (self-referential hash excluded); project workspace paths are excluded by the builder",
+  "inventory_excludes": "manifest.json itself (self-referential hash excluded); project workspace paths; canonical package ZIP if stored inside source folder",
   "file_count_excluding_manifest": 147,
-  "total_unicode_non_whitespace_file_code_points_excluding_manifest": 128484,
+  "total_unicode_non_whitespace_file_code_points_excluding_manifest": 136315,
   "root_files": {
     "01_自定义指令.md": 1103,
     "02_长期记忆.md": 476
@@ -1005,9 +1005,9 @@
       "path": "README.md",
       "version": "1.1.2",
       "encoding": "UTF-8",
-      "bytes": 11182,
-      "unicode_non_whitespace_file_code_points": 4510,
-      "sha256": "a7a57f2930b1839c96834c5ce2160bc090ca027a383c582d7a6c25dd9aa7739f"
+      "bytes": 11698,
+      "unicode_non_whitespace_file_code_points": 4714,
+      "sha256": "8e7a49641fb69355e065c6b37eace8aa0931da486158cfea0df1cd87f136b01c"
     },
     {
       "path": "release.json",
@@ -1029,25 +1029,25 @@
       "path": "工具/validate_state.py",
       "version": "1.1.2",
       "encoding": "UTF-8",
-      "bytes": 13979,
-      "unicode_non_whitespace_file_code_points": 11109,
-      "sha256": "fed9bf90848829f0e1447f1eefda6d0b09cb06245162b9e05d3eb521a5da0955"
+      "bytes": 14349,
+      "unicode_non_whitespace_file_code_points": 11379,
+      "sha256": "19da83981edc5fb6ad274ff305e0d2ba2fa1724f09fbce74014ac9f50fdd60b3"
     },
     {
       "path": "工具/字数统计.py",
       "version": "1.1.2",
       "encoding": "UTF-8",
-      "bytes": 2758,
-      "unicode_non_whitespace_file_code_points": 2070,
-      "sha256": "68e343a0f5cc9094f9353e017d6f83f2cbcbecc75d070188167faf5882ace55b"
+      "bytes": 3995,
+      "unicode_non_whitespace_file_code_points": 2835,
+      "sha256": "32055b8aba707126a0b138520e683a73699025f2376d78892742fa19838ffd6b"
     },
     {
       "path": "工具/构建与校验.py",
       "version": "1.1.2",
       "encoding": "UTF-8",
-      "bytes": 15132,
-      "unicode_non_whitespace_file_code_points": 11750,
-      "sha256": "885271752e23afbd80949e2591398317abfb667332c587e7d7172ffb371c3724"
+      "bytes": 17067,
+      "unicode_non_whitespace_file_code_points": 13372,
+      "sha256": "81e79e5cdc083645a8ff9305c746f867497917872f8511aac42c3dd229fad31e"
     },
     {
       "path": "工具/校验摘要.py",
@@ -1061,9 +1061,9 @@
       "path": "工具/测试工具.py",
       "version": "1.1.2",
       "encoding": "UTF-8",
-      "bytes": 11113,
-      "unicode_non_whitespace_file_code_points": 8458,
-      "sha256": "e14002e69467d39ba6c1e6cd8f0c3f33fe9be655e381235a6b574f4ecc0677c5"
+      "bytes": 17674,
+      "unicode_non_whitespace_file_code_points": 13428,
+      "sha256": "2e4c357bcfc3a5cc49455a91a535cd2a82d23b471e6e7620f957ac83361b644b"
     },
     {
       "path": "工具/重复检测.py",

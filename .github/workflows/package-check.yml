@@ -1,0 +1,49 @@
+name: Package verification
+
+on:
+  push:
+    branches: [arena/d2195c66-yuanyuan]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run package checks and preserve raw log
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          LOG="$RUNNER_TEMP/package-verification.log"
+          exec > >(tee -a "$LOG") 2>&1
+          echo "UTC: $(date -u --iso-8601=seconds)"
+          echo "Commit: $(git rev-parse HEAD)"
+          python --version
+          cd 'GLM多会话长篇小说创作技能包'
+          python -m py_compile 工具/*.py
+          python 工具/构建与校验.py verify --zip ../GLM多会话长篇小说创作技能包.zip
+          python 工具/构建与校验.py lint
+          python 工具/validate_state.py 项目运行模板/project_state.json
+          python 工具/字数统计.py --text '甲，乙'
+          python 工具/校验摘要.py 项目运行模板/滚动摘要.md
+          BUILD_DIR="$(mktemp -d)"
+          python 工具/构建与校验.py build --output "$BUILD_DIR/package.zip" --manifest-output "$BUILD_DIR/manifest.json"
+          python 工具/构建与校验.py verify --manifest "$BUILD_DIR/manifest.json" --zip "$BUILD_DIR/package.zip"
+          python 工具/测试工具.py
+          sha256sum ../GLM多会话长篇小说创作技能包.zip
+      - name: Upload raw verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-verification-log-${{ github.sha }}
+          path: ${{ runner.temp }}/package-verification.log
+          if-no-files-found: warn
+          retention-days: 90

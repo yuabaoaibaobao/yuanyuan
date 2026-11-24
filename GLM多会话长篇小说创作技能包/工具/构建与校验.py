@@ -20,7 +20,11 @@ RELEASE_FILE = ROOT / 'release.json'
 RELEASE = json.loads(RELEASE_FILE.read_text(encoding='utf-8'))
 VERSION = RELEASE['version']
 BUILD_DATE = RELEASE['build_date_utc']
-ZIP_PATH = ROOT.parent / f'{ROOT.name}.zip'  # convenience for local regression tests only
+try:
+    PACKAGE_NAME = json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8')).get('package', ROOT.name)
+except (OSError, json.JSONDecodeError):
+    PACKAGE_NAME = ROOT.name
+ZIP_PATH = ROOT.parent / f'{PACKAGE_NAME}.zip'  # convenience for local regression tests only
 EXTERNAL = ['用户使用指导/使用教程.md', '用户使用指导/导入检查单.md', '用户使用指导/故障排查表.md']
 FIRST = ['01_自定义指令.md', '02_长期记忆.md']
 WORKSPACE_DIRS = {'项目工作区'}
@@ -31,12 +35,28 @@ def count_chars(text: str) -> int:
     return sum(not ch.isspace() for ch in text)
 
 
+def _current_doc_version_errors(text: str, current_version: str) -> list[str]:
+    """Current README/P6 may cite only one package release version, not old/new mixtures."""
+    versions = set(re.findall(r'(?<![\w.])\d+\.\d+\.\d+(?![\w.])', text))
+    if current_version not in versions:
+        return [f'does not mention release version {current_version}']
+    stale = sorted(versions - {current_version})
+    return [f'contains mixed package release versions: {", ".join(stale)}'] if stale else []
+
+
+def _exact_index_mentions(text: str, name: str) -> int:
+    """Count filename tokens, not substrings embedded in names such as README.md.bak."""
+    pattern = rf'(?<![\w.-]){re.escape(name)}(?![\w.-])'
+    return len(re.findall(pattern, text))
+
+
 def is_workspace_path(path: Path) -> bool:
     return any(part in WORKSPACE_DIRS for part in path.parts) or path.name in WORKSPACE_FILES
 
 
 def included_file(path: Path) -> bool:
-    return (path.is_file() and path.name != 'manifest.json' and not is_workspace_path(path)
+    canonical_archive = path.name == f'{PACKAGE_NAME}.zip'
+    return (path.is_file() and path.name != 'manifest.json' and not canonical_archive and not is_workspace_path(path)
             and '__pycache__' not in path.parts and path.suffix not in {'.pyc', '.pyo'}
             and path.name != '.DS_Store')
 
@@ -73,10 +93,10 @@ def build(zip_path: Path, manifest_path: Path, overwrite: bool = False) -> None:
         raise FileExistsError(f'manifest already exists (pass overwrite=True explicitly): {manifest_path}')
     paths = files_in_order()
     entries = [record(p) for p in paths]
-    manifest = {'package': ROOT.name, 'version': VERSION, 'generated_date_utc': BUILD_DATE,
+    manifest = {'package': PACKAGE_NAME, 'version': VERSION, 'generated_date_utc': BUILD_DATE,
         'encoding': 'UTF-8 without BOM',
         'file_code_point_count_method': 'Full UTF-8 file text; Unicode non-whitespace code points; punctuation and Markdown framing count. Not chapter prose count.',
-        'inventory_excludes': 'manifest.json itself (self-referential hash excluded); project workspace paths are excluded by the builder',
+        'inventory_excludes': 'manifest.json itself (self-referential hash excluded); project workspace paths; canonical package ZIP if stored inside source folder',
         'file_count_excluding_manifest': len(entries),
         'total_unicode_non_whitespace_file_code_points_excluding_manifest': sum(e['unicode_non_whitespace_file_code_points'] for e in entries),
         'root_files': {p: next(e['unicode_non_whitespace_file_code_points'] for e in entries if e['path'] == p) for p in FIRST},
@@ -98,12 +118,14 @@ def build(zip_path: Path, manifest_path: Path, overwrite: bool = False) -> None:
           f'{manifest["total_unicode_non_whitespace_file_code_points_excluding_manifest"]:,} non-whitespace code points')
 
 
-def _resolve_zip(explicit: Optional[Path]) -> Optional[Path]:
+def _resolve_zips(explicit: Optional[Path], package_name: str) -> list[Path]:
+    """Resolve an explicit archive or all canonical ZIPs inside/beside extracted source."""
     if explicit is not None:
-        return explicit
-    candidates = [ROOT / f'{ROOT.name}.zip', ROOT.parent / f'{ROOT.name}.zip']
-    found = list(dict.fromkeys(p for p in candidates if p.is_file()))
-    return found[0] if len(found) == 1 else None
+        return [explicit]
+    if not package_name or Path(package_name).name != package_name:
+        return []
+    candidates = [ROOT / f'{package_name}.zip', ROOT.parent / f'{package_name}.zip']
+    return list(dict.fromkeys(p for p in candidates if p.is_file()))
 
 
 def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manifest.json', source_only: bool = False) -> bool:
@@ -143,40 +165,44 @@ def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manife
                 or count_chars(text) != item['unicode_non_whitespace_file_code_points']):
             errors.append(f'{rel}: manifest metadata mismatch')
 
-    archive = _resolve_zip(zip_path)
+    package_name = manifest.get('package', ROOT.name)
+    archives = _resolve_zips(zip_path, package_name)
     archive_checked = False
     if source_only and zip_path is not None:
         errors.append('--source-only cannot be combined with --zip')
-    if archive is None and not source_only:
-        errors.append('ZIP archive not found; pass --zip <archive> or explicitly choose --source-only')
-    if archive is not None and not source_only:
+    if not archives and not source_only:
+        errors.append('ZIP archive not found; pass --zip <archive> or place <package>.zip beside the source directory; explicitly choose --source-only to skip ZIP checks')
+    if archives and not source_only:
         archive_checked = True
-        if not archive.is_file(): errors.append(f'ZIP missing: {archive}')
-        else:
+        for archive in archives:
+            if not archive.is_file():
+                errors.append(f'ZIP missing: {archive}')
+                continue
             try:
                 with zipfile.ZipFile(archive) as zf:
                     bad = zf.testzip()
-                    if bad: errors.append(f'CRC failure: {bad}')
+                    if bad: errors.append(f'{archive}: CRC failure: {bad}')
                     names = zf.namelist()
-                    if names[:2] != FIRST: errors.append(f'ZIP must begin with {FIRST}')
-                    if len(names) < 12 or not names[2].startswith('作者01/'): errors.append('author folders must follow the first two root files')
+                    if names[:2] != FIRST: errors.append(f'{archive}: ZIP must begin with {FIRST}')
+                    if len(names) < 12 or not names[2].startswith('作者01/'): errors.append(f'{archive}: author folders must follow the first two root files')
                     groups = [n.split('/', 1)[0] for n in names if n.startswith('作者') and '/' in n]
-                    if list(dict.fromkeys(groups)) != [f'作者{i:02d}' for i in range(1, 11)]: errors.append('author folders must be grouped in 作者01–作者10 order')
-                    if names[-1] != 'manifest.json': errors.append('manifest.json must be last')
-                    if set(names) != set(expected) | {'manifest.json'}: errors.append('ZIP/source inventory mismatch')
+                    if list(dict.fromkeys(groups)) != [f'作者{i:02d}' for i in range(1, 11)]: errors.append(f'{archive}: author folders must be grouped in 作者01–作者10 order')
+                    if not names or names[-1] != 'manifest.json': errors.append(f'{archive}: manifest.json must be last')
+                    if set(names) != set(expected) | {'manifest.json'}: errors.append(f'{archive}: ZIP/source inventory mismatch')
                     if 'manifest.json' in names and zf.read('manifest.json') != manifest_path.read_bytes():
-                        errors.append('embedded ZIP manifest differs from selected manifest')
-                    if any(n in names for n in EXTERNAL): errors.append('external user guides found inside ZIP')
+                        errors.append(f'{archive}: embedded ZIP manifest differs from selected manifest')
+                    if any(n in names for n in EXTERNAL): errors.append(f'{archive}: external user guides found inside ZIP')
                     for rel, item in expected.items():
                         if rel in names and hashlib.sha256(zf.read(rel)).hexdigest() != item['sha256']:
-                            errors.append(f'ZIP hash mismatch: {rel}')
+                            errors.append(f'{archive}: ZIP hash mismatch: {rel}')
             except (OSError, zipfile.BadZipFile) as exc:
                 errors.append(f'cannot read ZIP {archive}: {exc}')
     if errors:
         for error in errors: print('FAIL: ' + error, file=sys.stderr)
         return False
     if archive_checked:
-        print(f'PASS: {len(expected)} source files; ZIP CRC/inventory/order/hashes and manifest metadata verified.')
+        verified = ', '.join(str(p) for p in archives)
+        print(f'PASS: {len(expected)} source files; {len(archives)} ZIP archive(s) verified [{verified}]; CRC/inventory/order/hashes and manifest metadata verified.')
     else:
         print(f'PASS (SOURCE ONLY): {len(expected)} source files and manifest verified; ZIP was NOT checked.')
     return True
@@ -216,15 +242,19 @@ def lint() -> bool:
         errors.append('package README: cannot find fenced directory index under section 9')
     else:
         index_text = '\n'.join(index_blocks)
-        missing_index = sorted(name for name in top_level if index_text.count(name) == 0)
-        duplicate_index = sorted(name for name in top_level if index_text.count(name) > 1)
+        missing_index = sorted(name for name in top_level if _exact_index_mentions(index_text, name) == 0)
+        duplicate_index = sorted(name for name in top_level if _exact_index_mentions(index_text, name) > 1)
         if missing_index: errors.append('package README directory index omits: ' + ', '.join(missing_index))
         if duplicate_index: errors.append('package README directory index duplicates: ' + ', '.join(duplicate_index))
 
     current_version = json.loads(RELEASE_FILE.read_text(encoding='utf-8'))['version']
-    for rel in ('README.md', 'CHANGELOG.md', 'P6验收报告.md'):
+    for rel in ('README.md', 'P6验收报告.md'):
         text = (ROOT / rel).read_text(encoding='utf-8')
-        if current_version not in text: errors.append(f'{rel}: does not mention release version {current_version}')
+        errors.extend(f'{rel}: {message}' for message in _current_doc_version_errors(text, current_version))
+    changelog = (ROOT / 'CHANGELOG.md').read_text(encoding='utf-8')
+    latest = re.search(r'(?m)^##\s+(\d+\.\d+\.\d+)\b', changelog)
+    if not latest or latest.group(1) != current_version:
+        errors.append(f'CHANGELOG.md: first release heading must be {current_version}')
 
     # Validate the checked-in state sample and fail closed if schema adds unsupported keywords.
     state_module = __import__('runpy').run_path(str(ROOT / '工具/validate_state.py'), run_name='targeted_lint_state')
@@ -237,7 +267,7 @@ def lint() -> bool:
         print('TARGETED LINT FAIL:')
         for error in errors: print('FAIL: ' + error, file=sys.stderr)
         return False
-    print('TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, exact top-level directory index, release-version mentions, and state sample/schema subset.')
+    print('TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, exact filename-token index, non-mixed current release mentions, and state sample/schema subset.')
     return True
 
 
@@ -250,7 +280,7 @@ def main() -> int:
     b.add_argument('--overwrite', action='store_true', help='explicitly allow replacing either existing output')
     v = sub.add_parser('verify')
     group = v.add_mutually_exclusive_group()
-    group.add_argument('--zip', type=Path, help='archive to verify; omitted means discover conventional location')
+    group.add_argument('--zip', type=Path, help='archive to verify; omitted checks all canonical package ZIPs beside/inside the source folder')
     group.add_argument('--source-only', action='store_true', help='explicitly skip ZIP verification and verify only source files/manifest')
     v.add_argument('--manifest', type=Path, default=ROOT / 'manifest.json')
     sub.add_parser('lint')
