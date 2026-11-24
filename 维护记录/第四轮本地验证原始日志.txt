@@ -1,0 +1,64 @@
+UTC: 2026-11-24T00:34:00+00:00
+Commit: faa402d8afd9ecd9515dd4770e013686326a8fac
+Tree: 141c7dffb5df4306efe26949974584a92d1ae84b
+Python 3.11.2
+$ python -m py_compile GLM多会话长篇小说创作技能包/工具/*.py
+$ python 工具/构建与校验.py verify --zip ../GLM多会话长篇小说创作技能包.zip
+PASS: 147 source files; 1 ZIP archive(s) verified [../GLM多会话长篇小说创作技能包.zip]; CRC/inventory/order/hashes and manifest metadata verified.
+$ python 工具/构建与校验.py lint
+TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, exact filename-token index, non-mixed current release mentions, and state sample/schema subset.
+$ python 工具/validate_state.py 项目运行模板/project_state.json
+PASS: declared JSON-Schema subset and structural/gate rules validated (项目运行模板/project_state.json).
+NOTE: registered file paths and hashes were not checked; pass --root <project-workspace> to check them.
+$ python 工具/字数统计.py --text '甲，乙'
+--text: 3 个Unicode非空白码点（含标点）
+计数模式：正文规范化；已去除YAML front matter、Markdown标题行和闭合HTML注释。与manifest全文件码点指标不同。
+$ python 工具/校验摘要.py 项目运行模板/滚动摘要.md
+PASS: summary structure and requested chapter coverage verified; semantic accuracy is not established.
+$ python 工具/测试工具.py
+test_current_document_version_lint_rejects_mixed_versions (__main__.BundleTests.test_current_document_version_lint_rejects_mixed_versions) ... ok
+test_custom_extraction_directory_finds_sibling_package_zip (__main__.BundleTests.test_custom_extraction_directory_finds_sibling_package_zip) ... ok
+test_directory_index_uses_exact_filename_tokens (__main__.BundleTests.test_directory_index_uses_exact_filename_tokens) ... ok
+test_embedded_zip_manifest_must_match_selected_manifest (__main__.BundleTests.test_embedded_zip_manifest_must_match_selected_manifest) ... ok
+test_explicit_source_only_mode_when_archive_is_absent (__main__.BundleTests.test_explicit_source_only_mode_when_archive_is_absent) ... ok
+test_lint_rejects_mixed_versions_in_real_current_docs (__main__.BundleTests.test_lint_rejects_mixed_versions_in_real_current_docs) ... ok
+test_reproducible_build_is_hermetic (__main__.BundleTests.test_reproducible_build_is_hermetic) ... ok
+test_semantic_lint (__main__.BundleTests.test_semantic_lint) ... ok
+test_source_manifest_and_zip_integrity (__main__.BundleTests.test_source_manifest_and_zip_integrity) ... ok
+test_source_verify_in_custom_directory_without_zip (__main__.BundleTests.test_source_verify_in_custom_directory_without_zip) ... ok
+test_chapter_boundaries (__main__.CountTests.test_chapter_boundaries) ... ok
+test_demo_pair_meets_chapter_length (__main__.CountTests.test_demo_pair_meets_chapter_length) ... ok
+test_inline_html_comment_preserves_following_prose (__main__.CountTests.test_inline_html_comment_preserves_following_prose) ... ok
+test_manifest_count_contract_uses_synthetic_markdown_fixture (__main__.CountTests.test_manifest_count_contract_uses_synthetic_markdown_fixture) ... ok
+test_text_and_file_count_use_same_prose_normalization (__main__.CountTests.test_text_and_file_count_use_same_prose_normalization) ... ok
+test_unclosed_html_comment_is_retained_and_cli_refuses_gate_count (__main__.CountTests.test_unclosed_html_comment_is_retained_and_cli_refuses_gate_count) ... ok
+test_whitespace_excluded_punctuation_included (__main__.CountTests.test_whitespace_excluded_punctuation_included) ... ok
+test_empty_summary_template_structural_check_passes_without_chapter_range (__main__.StateAndSummaryTests.test_empty_summary_template_structural_check_passes_without_chapter_range) ... ok
+test_inline_count_command_input (__main__.StateAndSummaryTests.test_inline_count_command_input) ... ok
+test_invalid_state_gate_and_enum_fail (__main__.StateAndSummaryTests.test_invalid_state_gate_and_enum_fail) ... ok
+test_markdown_heading_and_frontmatter_do_not_count_as_prose (__main__.StateAndSummaryTests.test_markdown_heading_and_frontmatter_do_not_count_as_prose) ... ok
+test_release_gate_requires_root_and_checks_registered_hashes (__main__.StateAndSummaryTests.test_release_gate_requires_root_and_checks_registered_hashes) ... ok
+test_repeated_paragraphs_are_advisory_with_sample_count (__main__.StateAndSummaryTests.test_repeated_paragraphs_are_advisory_with_sample_count) ... ok
+test_state_template_passes (__main__.StateAndSummaryTests.test_state_template_passes) ... ok
+test_summary_coverage_pass_and_gap_fail (__main__.StateAndSummaryTests.test_summary_coverage_pass_and_gap_fail) ... ok
+test_unknown_hash_report_does_not_claim_it_was_checked (__main__.StateAndSummaryTests.test_unknown_hash_report_does_not_claim_it_was_checked) ... ok
+test_workspace_files_are_not_package_sources (__main__.StateAndSummaryTests.test_workspace_files_are_not_package_sources) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.304s
+
+OK
+Built /tmp/tmpzewc02_a/GLM多会话长篇小说创作技能包.zip: 147 source files + manifest; 136,315 non-whitespace code points
+Built /tmp/tmpp47acqpm/source.zip: 147 source files + manifest; 136,315 non-whitespace code points
+PASS (SOURCE ONLY): 147 source files and manifest verified; ZIP was NOT checked.
+Built /tmp/tmpiu93dsgf/kit.zip: 147 source files + manifest; 136,315 non-whitespace code points
+Built /tmp/tmpiu93dsgf/kit.zip: 147 source files + manifest; 136,315 non-whitespace code points
+PASS: 147 source files; 1 ZIP archive(s) verified [/tmp/tmpiu93dsgf/kit.zip]; CRC/inventory/order/hashes and manifest metadata verified.
+TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, exact filename-token index, non-mixed current release mentions, and state sample/schema subset.
+PASS: 147 source files; 1 ZIP archive(s) verified [/home/user/yuanyuan/GLM多会话长篇小说创作技能包.zip]; CRC/inventory/order/hashes and manifest metadata verified.
+$ build overwrite guard (nonzero expected)
+FAIL: ZIP already exists (pass overwrite=True explicitly): GLM多会话长篇小说创作技能包.zip
+FAIL: ZIP already exists (pass overwrite=True explicitly): GLM多会话长篇小说创作技能包.zip
+$ git diff --check
+PASS: git diff --check (no output)
+c347d9b4a9024b16f0b0657c5cd1c6fe78eee85ccfd68af38fc31d736306f615  GLM多会话长篇小说创作技能包.zip

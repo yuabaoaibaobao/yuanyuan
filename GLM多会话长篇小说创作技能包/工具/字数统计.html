@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字数统计（浏览器版）— GLM多会话长篇小说创作技能包</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 16px; line-height: 1.5; }
+h1 { font-size: 1.2rem; }
+p, li { font-size: .92rem; }
+textarea { width: 100%; box-sizing: border-box; min-height: 260px; font-family: inherit; font-size: .95rem; padding: 8px; }
+button { padding: 6px 14px; margin-right: 8px; cursor: pointer; }
+#result { white-space: pre-wrap; border: 1px solid #8884; border-radius: 6px; padding: 10px; margin-top: 12px; min-height: 3em; }
+.pass { color: #1a7f37; font-weight: 600; }
+.fail { color: #cf222e; font-weight: 600; }
+.warn { color: #9a6700; }
+footer { margin-top: 16px; font-size: .8rem; opacity: .75; }
+</style>
+</head>
+<body>
+<h1>字数统计（浏览器版）</h1>
+<p>与包内<code>工具/字数统计.py</code>同一套正文规范化语义：剥离 YAML front matter、Markdown 标题行与闭合 HTML 注释；检测到未闭合 HTML 注释时保留文本、给出警告并<b>拒绝输出门禁计数</b>。统计口径：Unicode 非空白码点（含标点，不含空白）。</p>
+<p><label><input type="checkbox" id="gate" checked> 启用章节门禁（2500–4000 码点）</label></p>
+<textarea id="input" placeholder="把章正文粘贴到这里……"></textarea>
+<p><button id="countBtn">统计</button><button id="clearBtn">清空</button></p>
+<div id="result">（结果显示在这里）</div>
+<footer>本页面为无 Python 环境时的应急便捷工具，不发任何网络请求。验收与交接的权威复算仍以包内 Python 脚本为准；两套实现的空白字符判定存在极小差异，以 Python 结果为准。</footer>
+<script>
+(function () {
+  'use strict';
+  // 与 字数统计.py strip_html_comments 对齐：闭合注释删除；未闭合注释保留并告警。
+  function stripHtmlComments(text) {
+    var chunks = [], cursor = 0, unclosed = false;
+    while (true) {
+      var start = text.indexOf('<!--', cursor);
+      if (start < 0) { chunks.push(text.slice(cursor)); break; }
+      chunks.push(text.slice(cursor, start));
+      var end = text.indexOf('-->', start + 4);
+      if (end < 0) { chunks.push(text.slice(start)); unclosed = true; break; }
+      cursor = end + 3;
+    }
+    return { text: chunks.join(''), unclosed: unclosed };
+  }
+  // 与 字数统计.py prose_text_with_warnings 对齐。
+  function proseTextWithWarnings(text) {
+    text = text.replace(/^\uFEFF/, '');
+    var stripped = stripHtmlComments(text);
+    var warnings = stripped.unclosed ? ['检测到未闭合HTML注释起始符；注释样式文本已保留，请核对输入后再使用计数'] : [];
+    var lines = stripped.text.split(/\r\n|\n|\r/);
+    if (lines.length && lines[0].trim() === '---') {
+      for (var i = 1; i < lines.length; i++) {
+        if (lines[i].trim() === '---') { lines = lines.slice(i + 1); break; }
+      }
+    }
+    var body = lines.filter(function (line) { return !/^#{1,6}\s/.test(line); }).join('\n');
+    return { text: body, warnings: warnings };
+  }
+  // 与 count_chars 对齐：码点级计数（正确处理代理对），排除空白。
+  function countChars(text) {
+    var n = 0, iter = text[Symbol.iterator](), step = iter.next();
+    while (!step.done) { if (!/\s/.test(step.value)) n++; step = iter.next(); }
+    return n;
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function run() {
+    var out = document.getElementById('result');
+    var raw = document.getElementById('input').value;
+    var gate = document.getElementById('gate').checked;
+    if (!raw.trim()) { out.textContent = '（请先粘贴正文）'; return; }
+    var norm = proseTextWithWarnings(raw);
+    var html = '';
+    if (norm.warnings.length) {
+      norm.warnings.forEach(function (w) { html += '<span class="warn">警告：' + escapeHtml(w) + '</span>\n'; });
+      html += '不输出可用于章节门禁的计数；请先修复或确认输入。\n';
+      out.innerHTML = html;
+      return;
+    }
+    var count = countChars(norm.text);
+    html += '<b>正文计数：' + count + ' 个Unicode非空白码点（含标点）</b>\n';
+    html += '计数模式：正文规范化；已去除YAML front matter、Markdown标题行和闭合HTML注释。\n';
+    if (gate) {
+      var ok = 2500 <= count && count <= 4000;
+      html += ok ? '<span class="pass">通过字数区间检查；这不代表内容质量或审计通过。</span>'
+                 : '<span class="fail">不通过：每章目标为2500–4000。请核实统计范围；禁止用重复/注水文本补数。</span>';
+    }
+    out.innerHTML = html;
+  }
+  document.getElementById('countBtn').addEventListener('click', run);
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    document.getElementById('input').value = '';
+    document.getElementById('result').textContent = '（结果显示在这里）';
+  });
+  document.getElementById('input').addEventListener('input', function () { run(); });
+})();
+</script>
+</body>
+</html>

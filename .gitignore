@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+
+# User project data is kept apart from the distributable source files.
+**/项目工作区/
+**/项目状态索引.json

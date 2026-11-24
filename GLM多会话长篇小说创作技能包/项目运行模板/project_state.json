@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "project": "［填写项目名］",
+  "state_version": "v0.1",
+  "updated_at": "2026-11-22T00:00:00+00:00",
+  "owner": "用户/项目所有者",
+  "stage": "暂停",
+  "next_action": "填写并核对本项目状态后再启动；本示例未填真实项目数据，不可直接用于生产",
+  "next_owner": "用户/项目所有者",
+  "project_mode": "待选择",
+  "model": {
+    "display_name": "未知",
+    "entry": "未知",
+    "context_window": "未知",
+    "observed_at": "未验证"
+  },
+  "rule_versions": {"01": "未知", "02": "未知", "05": "未知", "audit": "未知"},
+  "injection_receipts": [],
+  "gates": {
+    "user_confirmation": "待检查",
+    "dependencies_read": "待检查",
+    "chapter_complete": "待检查",
+    "audit_07": "待检查",
+    "window_08": "不适用",
+    "release_09": "阻断"
+  },
+  "files": [],
+  "open_issue_ids": [],
+  "stale_candidates": [],
+  "chapter_batch": [],
+  "handoff_receipts": [],
+  "backup_location": "",
+  "pause_reason": "示例模板尚未绑定实际项目"
+}

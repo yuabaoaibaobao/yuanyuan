@@ -1,0 +1,387 @@
+{
+ "schema_version": "1.0",
+ "project": "雾港回声（E2E实测项目，虚构）",
+ "state_version": "v0.9.1",
+ "updated_at": "2026-11-24T07:41:00Z",
+ "owner": "用户（项目所有者）",
+ "stage": "定稿",
+ "next_action": "批次003-004已定稿；作者10建立质量账本（本次E2E实测范围外，待续）",
+ "next_owner": "作者10",
+ "project_mode": "人工合并会话",
+ "model": {
+  "display_name": "GLM系列（清言AgentMore实测环境）",
+  "entry": "清言AgentMore助手会话",
+  "context_window": "未验证",
+  "observed_at": "2026-11-24"
+ },
+ "rule_versions": {
+  "01": "1.2.0",
+  "02": "1.2.0",
+  "05": "1.2.0",
+  "audit": "1.2.0"
+ },
+ "injection_receipts": [
+  {
+   "component": "01",
+   "sha256": "e00b5d255dd475d383390af28594cd8e7dd799afaf25b8f83225d1d3205e9482",
+   "unicode_non_whitespace_code_points": 1216,
+   "at": "2026-11-24T05:00:00Z",
+   "observed_result": "本会话可读取全文；压缩防线、门禁、优先级条款在位（文件区读取，非指令注入实测）",
+   "confirmed_by": "用户（项目所有者）"
+  }
+ ],
+ "gates": {
+  "user_confirmation": "通过",
+  "dependencies_read": "通过",
+  "chapter_complete": "通过",
+  "audit_07": "通过",
+  "window_08": "不适用",
+  "release_09": "通过"
+ },
+ "files": [
+  {
+   "logical_path": "上游/第001章_演示正文.md",
+   "platform_name": "上游__第001章_演示正文.md",
+   "version": "示例v1.0",
+   "status": "归档",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "a9dc8fda58744bb0367379fc433f6f53fa32ec492b0bb27ed2faa3dd3f74bc68",
+   "read_receipts": [
+    {
+     "from": "用户（项目所有者）",
+     "to": "作者04",
+     "file_or_rule": "上游/第001章_演示正文.md",
+     "version_or_sha": "a9dc8fda",
+     "read_status": "已读",
+     "at": "2026-11-24T05:10:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "上游/第002章_演示正文.md",
+   "platform_name": "上游__第002章_演示正文.md",
+   "version": "示例v1.0",
+   "status": "归档",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "7a4f7ec6876073313326d4ae78f2fd4918113cc5f3d8721dd80797449961b988",
+   "read_receipts": [
+    {
+     "from": "用户（项目所有者）",
+     "to": "作者04",
+     "file_or_rule": "上游/第002章_演示正文.md",
+     "version_or_sha": "7a4f7ec6",
+     "read_status": "已读",
+     "at": "2026-11-24T05:10:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "上游/设定与卡片摘录.md",
+   "platform_name": "上游__设定与卡片摘录.md",
+   "version": "设定v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "914f95ee6cac8341e3a8daf4544f7c3717eb454d7094e4db8e18d19a2df41531",
+   "read_receipts": [
+    {
+     "from": "用户（项目所有者）",
+     "to": "作者04",
+     "file_or_rule": "上游/设定与卡片摘录.md（人物知识边界）",
+     "version_or_sha": "设定v1.0",
+     "read_status": "已读",
+     "at": "2026-11-24T05:10:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "章节卡_第003章_v1.md",
+   "platform_name": "章节卡_第003章_v1.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "chapter_card",
+   "sole_writer": "作者04",
+   "sha256": "ed44c1ae20008cbce4b00274feb1c06d3a29db440232473b96370575181c658f",
+   "depends_on": [
+    "上游/设定与卡片摘录.md",
+    "上游/第001章_演示正文.md"
+   ],
+   "read_receipts": [
+    {
+     "from": "作者05",
+     "to": "作者04",
+     "file_or_rule": "章节卡_第003章_v1.md",
+     "version_or_sha": "ed44c1ae",
+     "read_status": "已读",
+     "at": "2026-11-24T06:05:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "章节卡_第004章_v1.md",
+   "platform_name": "章节卡_第004章_v1.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "chapter_card",
+   "sole_writer": "作者04",
+   "sha256": "9482be739d16b5862784876e0ad7969d1cf1ff3e5323df4e0fbad9169c77bc5a",
+   "depends_on": [
+    "上游/设定与卡片摘录.md",
+    "上游/第002章_演示正文.md"
+   ],
+   "read_receipts": [
+    {
+     "from": "作者05",
+     "to": "作者04",
+     "file_or_rule": "章节卡_第004章_v1.md",
+     "version_or_sha": "9482be73",
+     "read_status": "已读",
+     "at": "2026-11-24T06:05:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "交接包_A04_A05_批次003-004.md",
+   "platform_name": "交接包_A04_A05_批次003-004.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "f91815fffb66e5c884ec22a1e6834c372385b62c281a77fd531b63536f116f6d",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "第003章_候选_v1.md",
+   "platform_name": "第003章_候选_v1.md",
+   "version": "v1.0",
+   "status": "草稿",
+   "artifact_kind": "draft",
+   "sole_writer": "作者05",
+   "sha256": "e628314a2afd5338e64659f7acc04e2f3ff7409ffd1e379ff81f175b4acc0372",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "第004章_候选_v1.md",
+   "platform_name": "第004章_候选_v1.md",
+   "version": "v1.0",
+   "status": "草稿",
+   "artifact_kind": "draft",
+   "sole_writer": "作者05",
+   "sha256": "8477eec3bb0f102fc5bf583510755b15aa912d577e8a8dcc246ce389163eb5d0",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "交接包_A05_A06_批次003-004.md",
+   "platform_name": "交接包_A05_A06_批次003-004.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "17ee6a42f99f85c67ec81b9d4227ce2a039fe3d213e1f45a8af7e924ce01a018",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "第003章_候选_v2.md",
+   "platform_name": "第003章_候选_v2.md",
+   "version": "v2.0",
+   "status": "审计通过",
+   "artifact_kind": "polished",
+   "sole_writer": "作者06",
+   "sha256": "a577a16e92ca5595ad74730335e8a6b152f4c94710e3afdd09eb1a4e068917bf",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "第004章_候选_v2.md",
+   "platform_name": "第004章_候选_v2.md",
+   "version": "v2.0",
+   "status": "审计通过",
+   "artifact_kind": "polished",
+   "sole_writer": "作者06",
+   "sha256": "716933af20e213cba851f77b063f39ce7a4177ec568a3a3c8b0a766973eec98b",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "自评卡_第003章_v2.md",
+   "platform_name": "自评卡_第003章_v2.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "60bffd2874e314513701aa63b82385d0f5090c063dd0a98560aa9723347e7a1b",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "自评卡_第004章_v2.md",
+   "platform_name": "自评卡_第004章_v2.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "75f151c80c305f5a72b46c5dfd2c1fb4317bc5bbeea92e1bedd845230e0a2825",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "交接包_A06_A07_批次003-004.md",
+   "platform_name": "交接包_A06_A07_批次003-004.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "8e15b2a536799b275e42b9d3d782a08a85248fa39f323e3fac2399e1597b89f6",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "作者07_双审报告_批次003-004.md",
+   "platform_name": "作者07_双审报告_批次003-004.md",
+   "version": "v1.0",
+   "status": "审计通过",
+   "artifact_kind": "audit",
+   "sole_writer": "作者07",
+   "sha256": "80da4e1cf007300a3974ebad85c2044b1ddc59284cace50155325f25b0018e94",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "交接包_A07_A09_批次003-004.md",
+   "platform_name": "交接包_A07_A09_批次003-004.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "1eab8786e4be80b10d9e32bbe0ecfeb5d80141d2617e5613cbd2baa40dc95909",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "第003章_定稿_v1.md",
+   "platform_name": "第003章_定稿_v1.md",
+   "version": "v1.0",
+   "status": "定稿",
+   "artifact_kind": "final",
+   "sole_writer": "作者09",
+   "sha256": "a577a16e92ca5595ad74730335e8a6b152f4c94710e3afdd09eb1a4e068917bf",
+   "read_receipts": [
+    {
+     "from": "作者09",
+     "to": "作者10",
+     "file_or_rule": "第003章_定稿_v1.md",
+     "version_or_sha": "a577a16e",
+     "read_status": "待确认",
+     "at": "2026-11-24T07:31:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "第004章_定稿_v1.md",
+   "platform_name": "第004章_定稿_v1.md",
+   "version": "v1.0",
+   "status": "定稿",
+   "artifact_kind": "final",
+   "sole_writer": "作者09",
+   "sha256": "716933af20e213cba851f77b063f39ce7a4177ec568a3a3c8b0a766973eec98b",
+   "read_receipts": [
+    {
+     "from": "作者09",
+     "to": "作者10",
+     "file_or_rule": "第004章_定稿_v1.md",
+     "version_or_sha": "716933af",
+     "read_status": "待确认",
+     "at": "2026-11-24T07:31:00Z"
+    }
+   ]
+  },
+  {
+   "logical_path": "放行单_第003章.md",
+   "platform_name": "放行单_第003章.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "328ca53fbeb263a1cc5f3d35251941ce228d45717128f075b785b13c35390b59",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "放行单_第004章.md",
+   "platform_name": "放行单_第004章.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "3737384e61f8d51fbbd02a1eb3c6e76f9b45ac72847abcc69fc41e694cef107a",
+   "read_receipts": []
+  },
+  {
+   "logical_path": "备案_INFO-003-1_叙述者有限披露口径.md",
+   "platform_name": "备案_INFO-003-1_叙述者有限披露口径.md",
+   "version": "v1.0",
+   "status": "已锁",
+   "artifact_kind": "other",
+   "sole_writer": "用户（项目所有者）",
+   "sha256": "6dae97d10164787fd3af9d13b82235f9190fe2b5ad195a9ef01ce51e04f37fef",
+   "read_receipts": [
+    {
+     "from": "作者07",
+     "to": "用户（项目所有者）",
+     "file_or_rule": "INFO-003-1备案口径",
+     "version_or_sha": "v1.0",
+     "read_status": "已读",
+     "at": "2026-11-24T07:41:00Z"
+    }
+   ]
+  }
+ ],
+ "open_issue_ids": [],
+ "stale_candidates": [],
+ "chapter_batch": [
+  {
+   "chapter": 3,
+   "candidate_status": "定稿",
+   "depends_on_canon_versions": {
+    "设定": "v1.0"
+   }
+  },
+  {
+   "chapter": 4,
+   "candidate_status": "定稿",
+   "depends_on_canon_versions": {
+    "设定": "v1.0"
+   }
+  }
+ ],
+ "handoff_receipts": [
+  {
+   "from": "作者04",
+   "to": "作者05",
+   "file_or_rule": "交接包_A04_A05_批次003-004.md",
+   "version_or_sha": "f91815ff",
+   "read_status": "已读",
+   "at": "2026-11-24T05:25:00Z"
+  },
+  {
+   "from": "作者05",
+   "to": "作者06",
+   "file_or_rule": "交接包_A05_A06_批次003-004.md",
+   "version_or_sha": "17ee6a42",
+   "read_status": "已读",
+   "at": "2026-11-24T06:06:00Z"
+  },
+  {
+   "from": "作者06",
+   "to": "作者07",
+   "file_or_rule": "交接包_A06_A07_批次003-004.md",
+   "version_or_sha": "8e15b2a5",
+   "read_status": "已读",
+   "at": "2026-11-24T06:31:00Z"
+  },
+  {
+   "from": "作者07",
+   "to": "作者09",
+   "file_or_rule": "交接包_A07_A09_批次003-004.md",
+   "version_or_sha": "1eab8786",
+   "read_status": "已读",
+   "at": "2026-11-24T07:11:00Z"
+  }
+ ],
+ "backup_location": "E2E工作区（本地目录）",
+ "pause_reason": ""
+}
