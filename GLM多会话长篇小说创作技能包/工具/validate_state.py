@@ -5,7 +5,7 @@ import argparse
 from datetime import datetime
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import sys
 from typing import Optional
@@ -126,19 +126,29 @@ def validate(data: object, root_dir: Optional[Path] = None) -> list[str]:
     for key in ('files','open_issue_ids','stale_candidates','injection_receipts','chapter_batch','handoff_receipts'):
         if key in data and not isinstance(data[key], list): errors.append(f'{key} must be an array')
     files = data.get('files', []) if isinstance(data.get('files', []), list) else []
+    logical_paths = []
     for i, item in enumerate(files):
         if not isinstance(item, dict): errors.append(f'files[{i}] must be an object'); continue
         for f in ('logical_path','platform_name','version','status','artifact_kind','sole_writer','sha256'):
             if not isinstance(item.get(f), str) or not item[f].strip(): errors.append(f'files[{i}].{f} must be a non-empty string')
+        rel = item.get('logical_path')
+        if isinstance(rel, str) and rel.strip():
+            posix = PurePosixPath(rel)
+            if posix.is_absolute() or '..' in posix.parts or str(posix) in {'', '.'} or '\\' in rel:
+                errors.append(f'files[{i}].logical_path must be a safe relative POSIX path')
+            logical_paths.append(rel)
         if item.get('status') not in STATUSES: errors.append(f'files[{i}].status has invalid enum value')
         expected_writer = {
             'project_state': data.get('owner'), 'canon': '作者03', 'chapter_card': '作者04',
             'draft': '作者05', 'polished': '作者06', 'audit': '作者07', 'window_report': '作者08',
-            'final': '作者09', 'quality_ledger': '作者10', 'rolling_summary': '项目所有者'
+            'final': '作者09', 'quality_ledger': '作者10', 'rolling_summary': '项目所有者',
+            'other': data.get('owner')
         }.get(item.get('artifact_kind'))
         if expected_writer and item.get('sole_writer') != expected_writer:
             errors.append(f'files[{i}].sole_writer must be {expected_writer!r} for artifact_kind {item.get("artifact_kind")!r}')
         if isinstance(item.get('sha256'), str) and item['sha256'] != '未知' and not re.fullmatch(r'[a-fA-F0-9]{64}', item['sha256']): errors.append(f'files[{i}].sha256 must be 64 hex characters or 未知')
+    if len(logical_paths) != len(set(logical_paths)):
+        errors.append('files.logical_path values must be unique')
     for key in ('open_issue_ids','stale_candidates'):
         values = data.get(key, [])
         if isinstance(values, list) and (not all(isinstance(x, str) and x for x in values) or len(values) != len(set(values))): errors.append(f'{key} must contain unique non-empty strings')
@@ -156,18 +166,23 @@ def validate(data: object, root_dir: Optional[Path] = None) -> list[str]:
         for gate in ('dependencies_read','chapter_complete','audit_07'):
             if gates.get(gate) != '通过': errors.append(f'release_09 requires {gate}=通过')
         if gates.get('window_08') not in {'通过','不适用'}: errors.append('release_09 requires window_08=通过 or 不适用')
+        if not files: errors.append('release_09 requires at least one registered file')
         if root_dir is None: errors.append('release_09=通过 requires --root to verify registered file paths and hashes')
-        else:
-            base = root_dir.resolve()
-            for i, item in enumerate(files):
-                rel = item.get('logical_path')
-                if not isinstance(rel, str): continue
-                target = (base / rel).resolve()
-                try: target.relative_to(base)
-                except ValueError: errors.append(f'files[{i}].logical_path escapes --root'); continue
-                if not target.is_file(): errors.append(f'files[{i}].logical_path does not exist under --root: {rel}'); continue
-                digest = hashlib.sha256(target.read_bytes()).hexdigest()
-                if item.get('sha256') != digest: errors.append(f'files[{i}].sha256 does not match file bytes: {rel}')
+    if root_dir is not None:
+        base = root_dir.resolve()
+        for i, item in enumerate(files):
+            if not isinstance(item, dict): continue
+            rel = item.get('logical_path')
+            if not isinstance(rel, str): continue
+            target = (base / rel).resolve()
+            try: target.relative_to(base)
+            except ValueError: errors.append(f'files[{i}].logical_path escapes --root'); continue
+            if not target.is_file(): errors.append(f'files[{i}].logical_path does not exist under --root: {rel}'); continue
+            digest = hashlib.sha256(target.read_bytes()).hexdigest()
+            if item.get('sha256') != '未知' and item.get('sha256') != digest:
+                errors.append(f'files[{i}].sha256 does not match file bytes: {rel}')
+            elif item.get('sha256') == '未知' and isinstance(gates, dict) and gates.get('release_09') == '通过':
+                errors.append(f'files[{i}].sha256 must be recorded before release: {rel}')
     return errors
 
 
@@ -184,8 +199,8 @@ def main() -> int:
         for error in errors: print('FAIL: ' + error, file=sys.stderr)
         return 1
     print(f'PASS: declared JSON-Schema subset and structural/gate rules validated ({args.state}).')
-    if args.root is not None: print(f'PASS: release file paths, sole-writer roles, and SHA-256 checked under {args.root}.')
-    elif data.get('gates', {}).get('release_09') != '通过': print('NOTE: no --root supplied; file existence/hash checks not requested because release is not passing.')
+    if args.root is not None: print(f'PASS: registered file paths and known SHA-256 values checked under {args.root}.')
+    else: print('NOTE: registered file paths and hashes were not checked; pass --root <project-workspace> to check them.')
     return 0
 
 if __name__ == '__main__': raise SystemExit(main())

@@ -7,27 +7,18 @@ import re
 
 
 def prose_text(text: str) -> str:
-    """Remove only recognizable Markdown framing; this is not semantic text extraction."""
+    """Remove recognizable Markdown framing; preserve prose around inline comments."""
     text = text.lstrip('\ufeff')
+    # Remove closed inline/block comments without discarding prose after a same-line close.
+    # An unclosed comment is treated as extending to EOF, per HTML comment syntax.
+    text = re.sub(r'<!--.*?(?:-->|\Z)', '', text, flags=re.S)
     lines = text.splitlines()
     if lines and lines[0].strip() == '---':
         for i in range(1, len(lines)):
             if lines[i].strip() == '---':
                 lines = lines[i + 1:]
                 break
-    filtered = []
-    in_comment = False
-    for line in lines:
-        stripped = line.strip()
-        if in_comment:
-            if '-->' in line: in_comment = False
-            continue
-        if '<!--' in line:
-            if '-->' not in line[line.find('<!--') + 4:]: in_comment = True
-            line = line.split('<!--', 1)[0]
-        if re.match(r'^#{1,6}\s+', line): continue
-        filtered.append(line)
-    return '\n'.join(filtered)
+    return '\n'.join(line for line in lines if not re.match(r'^#{1,6}\s+', line))
 
 
 def count_chars(text: str) -> int:

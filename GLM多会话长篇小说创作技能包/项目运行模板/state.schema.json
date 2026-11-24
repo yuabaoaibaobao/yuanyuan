@@ -224,7 +224,8 @@
         },
         "sole_writer": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Exactly one accountable role; artifact_kind other must be written by project owner"
         },
         "sha256": {
           "type": "string",

@@ -2,14 +2,15 @@
 """Build and verify the kit package (Python 3.9+, stdlib only).
 
 The command-line builder requires explicit output paths and never overwrites an
-existing file unless --overwrite is supplied. `verify` checks source files even
-when the ZIP is elsewhere or absent; use --zip to verify a particular archive.
+existing file unless --overwrite is supplied. `verify` requires an archive unless
+source-only verification is explicitly selected with --source-only.
 """
 from __future__ import annotations
 import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 import zipfile
 from typing import Optional
@@ -55,7 +56,7 @@ def record(path: Path) -> dict:
     text = raw.decode('utf-8')
     rel = path.relative_to(ROOT).as_posix()
     return {'path': rel, 'version': VERSION, 'encoding': 'UTF-8', 'bytes': len(raw),
-            'unicode_non_whitespace_characters': count_chars(text), 'sha256': hashlib.sha256(raw).hexdigest()}
+            'unicode_non_whitespace_file_code_points': count_chars(text), 'sha256': hashlib.sha256(raw).hexdigest()}
 
 
 def _write_manifest(manifest_path: Path, manifest: dict, overwrite: bool) -> None:
@@ -74,11 +75,11 @@ def build(zip_path: Path, manifest_path: Path, overwrite: bool = False) -> None:
     entries = [record(p) for p in paths]
     manifest = {'package': ROOT.name, 'version': VERSION, 'generated_date_utc': BUILD_DATE,
         'encoding': 'UTF-8 without BOM',
-        'character_count_method': 'Unicode non-whitespace code points; punctuation counts; see 工具/字数统计.py',
+        'file_code_point_count_method': 'Full UTF-8 file text; Unicode non-whitespace code points; punctuation and Markdown framing count. Not chapter prose count.',
         'inventory_excludes': 'manifest.json itself (self-referential hash excluded); project workspace paths are excluded by the builder',
         'file_count_excluding_manifest': len(entries),
-        'total_unicode_non_whitespace_characters_excluding_manifest': sum(e['unicode_non_whitespace_characters'] for e in entries),
-        'root_files': {p: next(e['unicode_non_whitespace_characters'] for e in entries if e['path'] == p) for p in FIRST},
+        'total_unicode_non_whitespace_file_code_points_excluding_manifest': sum(e['unicode_non_whitespace_file_code_points'] for e in entries),
+        'root_files': {p: next(e['unicode_non_whitespace_file_code_points'] for e in entries if e['path'] == p) for p in FIRST},
         'external_guides_not_in_zip': EXTERNAL, 'files': entries}
     _write_manifest(manifest_path, manifest, overwrite)
 
@@ -94,7 +95,7 @@ def build(zip_path: Path, manifest_path: Path, overwrite: bool = False) -> None:
             add_file(zf, p, p.relative_to(ROOT).as_posix())
         add_file(zf, manifest_path, 'manifest.json')
     print(f'Built {zip_path}: {len(entries)} source files + manifest; '
-          f'{manifest["total_unicode_non_whitespace_characters_excluding_manifest"]:,} non-whitespace code points')
+          f'{manifest["total_unicode_non_whitespace_file_code_points_excluding_manifest"]:,} non-whitespace code points')
 
 
 def _resolve_zip(explicit: Optional[Path]) -> Optional[Path]:
@@ -105,7 +106,7 @@ def _resolve_zip(explicit: Optional[Path]) -> Optional[Path]:
     return found[0] if len(found) == 1 else None
 
 
-def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manifest.json') -> bool:
+def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manifest.json', source_only: bool = False) -> bool:
     try:
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
     except (OSError, json.JSONDecodeError) as exc:
@@ -123,7 +124,7 @@ def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manife
         for rel in required:
             if not (ROOT / rel).is_file(): errors.append(f'required author file missing: {rel}')
     for rel in FIRST:
-        if rel in expected and expected[rel]['unicode_non_whitespace_characters'] > 2000:
+        if rel in expected and expected[rel]['unicode_non_whitespace_file_code_points'] > 2000:
             errors.append(f'{rel}: exceeds 2000-code-point project limit')
     actual_paths = {p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*') if included_file(p)}
     missing, extra = set(expected) - actual_paths, actual_paths - set(expected)
@@ -139,12 +140,16 @@ def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manife
             errors.append(f'{rel}: cannot read as UTF-8: {exc}'); continue
         if raw.startswith(b'\xef\xbb\xbf'): errors.append(f'{rel}: UTF-8 BOM')
         if (len(raw) != item['bytes'] or hashlib.sha256(raw).hexdigest() != item['sha256']
-                or count_chars(text) != item['unicode_non_whitespace_characters']):
+                or count_chars(text) != item['unicode_non_whitespace_file_code_points']):
             errors.append(f'{rel}: manifest metadata mismatch')
 
     archive = _resolve_zip(zip_path)
     archive_checked = False
-    if archive is not None:
+    if source_only and zip_path is not None:
+        errors.append('--source-only cannot be combined with --zip')
+    if archive is None and not source_only:
+        errors.append('ZIP archive not found; pass --zip <archive> or explicitly choose --source-only')
+    if archive is not None and not source_only:
         archive_checked = True
         if not archive.is_file(): errors.append(f'ZIP missing: {archive}')
         else:
@@ -173,7 +178,7 @@ def verify(zip_path: Optional[Path] = None, manifest_path: Path = ROOT / 'manife
     if archive_checked:
         print(f'PASS: {len(expected)} source files; ZIP CRC/inventory/order/hashes and manifest metadata verified.')
     else:
-        print(f'PASS: {len(expected)} source files; manifest/source integrity verified. ZIP check skipped (no archive auto-discovered; pass --zip to verify one).')
+        print(f'PASS (SOURCE ONLY): {len(expected)} source files and manifest verified; ZIP was NOT checked.')
     return True
 
 
@@ -205,8 +210,21 @@ def lint() -> bool:
 
     top_level = {p.name for p in ROOT.iterdir() if p.is_file() and included_file(p)}
     readme = (ROOT / 'README.md').read_text(encoding='utf-8')
-    unindexed = sorted(name for name in top_level if name not in readme)
-    if unindexed: errors.append('package README top-level index omits: ' + ', '.join(unindexed))
+    section = re.search(r'(?ms)^## 9\. 目录索引\s*\n(.*?)(?=^## |\Z)', readme)
+    index_blocks = re.findall(r'```[^\n]*\n(.*?)```', section.group(1), re.S) if section else []
+    if not index_blocks:
+        errors.append('package README: cannot find fenced directory index under section 9')
+    else:
+        index_text = '\n'.join(index_blocks)
+        missing_index = sorted(name for name in top_level if index_text.count(name) == 0)
+        duplicate_index = sorted(name for name in top_level if index_text.count(name) > 1)
+        if missing_index: errors.append('package README directory index omits: ' + ', '.join(missing_index))
+        if duplicate_index: errors.append('package README directory index duplicates: ' + ', '.join(duplicate_index))
+
+    current_version = json.loads(RELEASE_FILE.read_text(encoding='utf-8'))['version']
+    for rel in ('README.md', 'CHANGELOG.md', 'P6验收报告.md'):
+        text = (ROOT / rel).read_text(encoding='utf-8')
+        if current_version not in text: errors.append(f'{rel}: does not mention release version {current_version}')
 
     # Validate the checked-in state sample and fail closed if schema adds unsupported keywords.
     state_module = __import__('runpy').run_path(str(ROOT / '工具/validate_state.py'), run_name='targeted_lint_state')
@@ -215,17 +233,11 @@ def lint() -> bool:
     unsupported = state_module['unsupported_schema_keywords']()
     if unsupported: errors.append('state schema uses unsupported keywords: ' + ', '.join(unsupported))
 
-    mapping_path = ROOT.parent / '维护记录/技能包研发档案/模板覆盖与契约矩阵_维护记录.md'
-    if mapping_path.is_file():  # Optional repository maintenance evidence; deliberately not shipped in the ZIP.
-        mapping = mapping_path.read_text(encoding='utf-8')
-        for i in range(1, 11):
-            if f'| {i:02d} |' not in mapping: errors.append(f'template/contract matrix missing author {i:02d}')
-
     if errors:
         print('TARGETED LINT FAIL:')
         for error in errors: print('FAIL: ' + error, file=sys.stderr)
         return False
-    print('TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, top-level index, state sample/schema subset, and 10-author matrix presence.')
+    print('TARGETED LINT PASS: named README fallbacks, author07 review scope, author09 ledger boundary, exact top-level directory index, release-version mentions, and state sample/schema subset.')
     return True
 
 
@@ -237,7 +249,9 @@ def main() -> int:
     b.add_argument('--manifest-output', required=True, type=Path, help='new manifest output path')
     b.add_argument('--overwrite', action='store_true', help='explicitly allow replacing either existing output')
     v = sub.add_parser('verify')
-    v.add_argument('--zip', type=Path, help='archive to verify; omitted means discover conventional location or source-only verification')
+    group = v.add_mutually_exclusive_group()
+    group.add_argument('--zip', type=Path, help='archive to verify; omitted means discover conventional location')
+    group.add_argument('--source-only', action='store_true', help='explicitly skip ZIP verification and verify only source files/manifest')
     v.add_argument('--manifest', type=Path, default=ROOT / 'manifest.json')
     sub.add_parser('lint')
     args = parser.parse_args()
@@ -246,7 +260,7 @@ def main() -> int:
         except (OSError, zipfile.BadZipFile) as exc:
             print(f'FAIL: {exc}', file=sys.stderr); return 1
         return 0
-    if args.action == 'verify': return 0 if verify(args.zip, args.manifest) else 1
+    if args.action == 'verify': return 0 if verify(args.zip, args.manifest, args.source_only) else 1
     return 0 if lint() else 1
 
 if __name__ == '__main__': raise SystemExit(main())

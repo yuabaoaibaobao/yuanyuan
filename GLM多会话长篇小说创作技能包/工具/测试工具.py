@@ -38,6 +38,17 @@ class CountTests(unittest.TestCase):
         for name in ['第001章_演示正文.md', '第002章_演示正文.md']:
             text = (root / name).read_text(encoding='utf-8')
             self.assertTrue(2500 <= counter.count_chars(text) <= 4000, name)
+    def test_inline_html_comment_preserves_following_prose(self):
+        text = '正文甲<!-- 隐藏批注 -->乙丙丁'
+        self.assertEqual(counter.count_chars(counter.prose_text(text)), 6)
+        self.assertEqual(counter.count_chars(counter.prose_text('正文甲<!-- 未闭合批注')), 3)
+    def test_manifest_file_count_is_raw_and_distinct_from_prose_count(self):
+        path = ROOT / 'README.md'
+        entry = bundle.record(path)
+        full_count = bundle.count_chars(path.read_text(encoding='utf-8'))
+        prose_count = counter.count_chars(counter.prose_text(path.read_text(encoding='utf-8')))
+        self.assertEqual(entry['unicode_non_whitespace_file_code_points'], full_count)
+        self.assertNotEqual(full_count, prose_count)
 
 class StateAndSummaryTests(unittest.TestCase):
     def test_state_template_passes(self):
@@ -60,12 +71,18 @@ class StateAndSummaryTests(unittest.TestCase):
             payload = base / 'chapter.md'
             payload.write_text('定稿正文', encoding='utf-8')
             data['files'] = [{'logical_path': 'chapter.md', 'platform_name': 'chapter.md', 'version': 'v1',
-                'status': '定稿', 'artifact_kind': 'other', 'sole_writer': '用户',
+                'status': '定稿', 'artifact_kind': 'other', 'sole_writer': data['owner'],
                 'sha256': hashlib.sha256(payload.read_bytes()).hexdigest(), 'read_receipts': []}]
             self.assertTrue(any('--root' in error for error in state.validate(data)))
             self.assertEqual(state.validate(data, base), [])
             data['files'][0]['sha256'] = '0' * 64
             self.assertTrue(any('does not match file bytes' in error for error in state.validate(data, base)))
+            data['files'][0]['sha256'] = '未知'
+            data['files'][0]['sole_writer'] = '任意会话'
+            self.assertTrue(any('sole_writer must be' in error for error in state.validate(data, base)))
+            data['files'][0]['sole_writer'] = data['owner']
+            data['files'][0]['logical_path'] = '../outside.md'
+            self.assertTrue(any('safe relative POSIX path' in error for error in state.validate(data, base)))
     def test_repeated_paragraphs_are_advisory_with_sample_count(self):
         count, near, exact = repetition.inspect('重复段落甲乙丙。\n\n另一段内容。\n\n重复段落甲乙丙。')
         self.assertEqual(count, 3)
@@ -75,10 +92,21 @@ class StateAndSummaryTests(unittest.TestCase):
         self.assertEqual(counter.count_chars(counter.prose_text(text)), 3)
     def test_inline_count_command_input(self):
         self.assertEqual(counter.count_chars('甲，乙'), 3)
+        import subprocess, sys
+        script = str(TOOLS / '字数统计.py')
+        result = subprocess.run([sys.executable, script, '--text', '甲，乙'], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('3 个Unicode非空白码点', result.stdout)
+        chapter_gate = subprocess.run([sys.executable, script, '--text', '甲，乙', '--chapter-range'], capture_output=True, text=True)
+        self.assertEqual(chapter_gate.returncode, 1)
     def test_workspace_files_are_not_package_sources(self):
         self.assertTrue(bundle.is_workspace_path(Path('项目状态索引.json')))
         self.assertTrue(bundle.is_workspace_path(Path('项目工作区/chapter-001.md')))
         self.assertFalse(bundle.is_workspace_path(Path('作者05/会话指令.md')))
+    def test_empty_summary_template_structural_check_passes_without_chapter_range(self):
+        text = (ROOT / '项目运行模板/滚动摘要.md').read_text(encoding='utf-8')
+        self.assertEqual(summary.validate(text), [])
+        self.assertTrue(any('missing chapter rows' in e for e in summary.validate(text, set(range(1, 16)))))
     def test_summary_coverage_pass_and_gap_fail(self):
         text = '''# 摘要\n- 项目/摘要版本/生效时间：x\n- 覆盖章号闭区间：1-2\n- 相关定稿版本/哈希清单：x\n- 最近校验者/校验报告版本：x\n| 章号/定稿版本 | 关键事件与因果 | 人物状态 | 伏笔 | 道具/地点/时间/规则 | 回查路径 | 状态 |\n|---|---|---|---|---|---|---|\n| 1 / v1 | x | x | x | x | x | 已确认 |\n| 2 / v1 | x | x | x | x | x | 已确认 |\n## 窗口共识\nx\n## 更新与完整性\nx\n'''
         self.assertEqual(summary.validate(text, {1, 2}), [])
@@ -86,7 +114,7 @@ class StateAndSummaryTests(unittest.TestCase):
 
 class BundleTests(unittest.TestCase):
     def test_source_manifest_and_zip_integrity(self):
-        self.assertTrue(bundle.verify())
+        self.assertTrue(bundle.verify(source_only=not bundle.ZIP_PATH.is_file()))
     def test_embedded_zip_manifest_must_match_selected_manifest(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
@@ -121,14 +149,24 @@ class BundleTests(unittest.TestCase):
             clone = Path(tmp) / 'newpack'
             shutil.copytree(ROOT, clone, ignore=shutil.ignore_patterns('__pycache__', '项目工作区'))
             result = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'verify'], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertIn('ZIP archive not found', result.stderr)
+            result = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'verify', '--source-only'], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn('ZIP check skipped', result.stdout)
+            self.assertIn('PASS (SOURCE ONLY)', result.stdout)
             child_env = dict(os.environ, KIT_NO_CLONE_TEST='1')
             result_tests = subprocess.run([sys.executable, str(clone / '工具/测试工具.py')], capture_output=True, text=True, env=child_env)
             self.assertEqual(result_tests.returncode, 0, result_tests.stderr)
             self.assertIn('Ran ', result_tests.stderr)
             self.assertNotIn('ERROR', result_tests.stderr)
             self.assertNotIn('FAILED', result_tests.stderr)
+            (clone / '随手笔记.md').write_text('not part of the manifest', encoding='utf-8')
+            index_lint = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'lint'], capture_output=True, text=True)
+            self.assertEqual(index_lint.returncode, 1)
+            self.assertIn('directory index omits: 随手笔记.md', index_lint.stderr)
+            extra = subprocess.run([sys.executable, str(clone / '工具/构建与校验.py'), 'verify', '--source-only'], capture_output=True, text=True)
+            self.assertEqual(extra.returncode, 1)
+            self.assertIn('manifest/source inventory mismatch', extra.stderr)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
